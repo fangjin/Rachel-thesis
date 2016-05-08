@@ -1,0 +1,290 @@
+\section{Experimental Results} \label{sec:experiment}
+This section discusses the applications of our approach for detecting group absenteeism.
+We begin by briefly describing the datasets we use for our experiments in Section~\ref{sec:data_collection}.
+Then we discuss in Section~\ref{sec:experimental_setup} how we assemble the graph $\mathbf{G}$ and construct the graph wavelets $\psi_{s,n}$ for absenteeism based event detection.
+Finally, in Section~\ref{sec:highlighted_results}, we describe the three case studies that illustrate how the two-pass event detection method is able to identify  absenteeism events.
+\subsection{Data Collection and Preprocessing}
+\label{sec:data_collection}
+The study described in this paper uses tweets from 22 countries in Latin America that were collected over 12 months (May 2013 to May 2014).
+We query Datasift's streaming API to collect these tweets that also have meta-information including geotag bounding boxes (structured geographical coordinates), Twitter Places (structured data), user profile location (unstructured, unverified strings), and 'mentions information' about locations present in the body of the tweet
+Typically, we found the number of tweets with readily available geo-coordinates is too low for conducting meaningful experiments.
+To circumvent this, we use the geo-enrichment algorithm described in~\cite{ramakrishnan2014beating}.
+This algorithm uses a gazetteer-based approach to look-up location names and geo-coordinates.
+To identify  location-specific tweets, we configure the geocoding tool to first consider the tweet's text for mentions of place names and geographical landmarks (e.g., say, Plaza de la Independencia (Quito, Ecuador)).
+In cases when no geographical location was found in the tweet's text, it then proceeds to process the geographical coordinates and the self-reported location string in user's profile metadata.
+Using the geocoding tool, we were able to extract tweets corresponding to $598,300$ unique cities from Latin America.
+Of those, we focused on $1290$ cities that had a daily average tweet volume greater than 100.
+
+%To prepare a dataset of ground truth events for our study, we focused on specific types of disruptive societal events, such as natural disasters.
+%We assume that such events are the predominant reasons that can cause group absenteeism on social networks.
+%To discern when major events occurred, we retrieved records of natural disaster related events involving earthquakes, floods, and landslides from European Emergency Response Coordination Center(ERCC)~\footnote{http://erccportal.jrc.ec.europa.eu/} and World Top Stories Timeline~\footnote{http://www.mapreport.com/}.
+\subsection{Experimental Setup}
+\label{sec:experimental_setup}
+In our experiments, for each Latin American country we create a graph $G(V,E,W; f)$ where each node $v \in V$ describes a city, $f$ denotes the Z-score distribution along each node, and each edge connects the nearby cities. To reduce the graph complexity, we employ a 10-nearest neighbor algorithm to construct edges in the graph. By traversing each $v$ the edge set $E$ is determined, where weight of edge $e_{ij}$ is computed as:
+\begin{equation}
+w_{ij}=exp(-{d^2_{ij}}/{2\sigma^2})
+\end{equation} , where $d_{ij}=\sqrt{(lat_i-lat_j)^2+(lon_i-lon_j)^2}$, and $\sigma^2=1$. $lat_i$ and $lon_i$ denotes the geographical coordinate pair representing each city.
+Our choice for the wavelet generating kernel function, $g(x)$, is motivated by our goal to achieve scale-dependent localization.
+\begin{equation}
+g(x) = \left\{ \begin{array}{rl}
+ x &\mbox{ for $x<1$} \\
+s(x) &\mbox{ for $1\leq x \leq 2$} \\
+ 2x^{-1} &\mbox{ for $x>2$} \\
+       \end{array} \right.
+\end{equation}
+where $s(x)=-5+11x-6x^2+x^3$.
+The scale set $\{s_j\}_{j=1}^J$ is selected to be equally logarithmically spaced between the minimum and maximum scales $s_1$ and $s_J$, which are defined in~\cite{hammond2011wavelets}.
+
+\subsection{Case Studies}
+\label{sec:highlighted_results}
+
+\begin{figure}[t]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=1.3in,height=1.5in] {figures/Chile_absent_zscore_3.png}
+		\label{fig:absent_Chile_score}
+	}
+	\hfill
+	\subfigure[]{
+		\includegraphics[width=1.3in,height=1.5in] {figures/Chile_absent_wavelet_3.png}
+		\label{fig:absent_Chile_wavelet}
+	}
+	\hfill
+	\subfigure[]{
+		\includegraphics[width=1.3in,height=1.5in] {figures/Chile_burst_zscore_3.png}
+		\label{fig:burst_Chile_score}
+	}
+	\hfill
+	\subfigure[]{
+		\includegraphics[width=1.3in,height=1.5in] {figures/Chile_burst_wavelet_3.png}
+		\label{fig:burst_Chile_wavelet}
+	}
+\vspace{-2mm}
+	\caption{Iquique Earthquake, Chile. Above plots show differences in distributions of absenteeism score and wavelet coefficients calculated at 8:45 PM, April 1, 2014 (a-b) involving group absenteeism and later when burst in activity is captured at 11:00 AM, April 2, 2014 (c-d), respectively.}
+\label{fig:case1_wavelet}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=3in,height=1.5in] {figures/earthquake_example_10min_circle.png}
+		\label{fig:earthquake}
+	}
+	\subfigure[]{
+		\includegraphics[width=3in,height=1.5in] {figures/earthquake_cloud.png}
+		\label{fig:earthquake-cloud}
+	}
+\vspace{-2mm}	
+	\caption{Iquique earthquake, Chile, April 1, 2014. (a) Tweet time series for Iquique on April 1, 2014. (b) Word cloud of tweets which mention `Iquique'.}
+\label{fig:case1_cloud}
+\end{figure}
+
+\textbf{Case study 1: Iquique Earthquake, Chile.}
+On April 1, 2014 around 8:46 PM (local time) a large earthquake struck off the coast of Chile, northwest of the port city of Iquique.
+We show the distribution of absenteeism scores and normalized wavelet coefficient values of the graph wavelets from the beginning of this event and over a 24 hour period.
+As shown in Figure~\ref{fig:absent_Chile_score} we observe an absenteeism behavior, where the scores are dominated by very low (blue spectrum) of Z-score values (indicating high absenteeism).
+Likewise in Figure~\ref{fig:absent_Chile_wavelet}, we witness low coefficients values for the northern regions of Chile, where the impact of the earthquake was most significant.
+As the news of earthquake spread throughout the next day, user activity on social media increased. This bursty behavior is seen on April 2nd, around 11:00 AM. We can observe from Figure~\ref{fig:burst_Chile_score} that our z-scores have increased (red spectrum) significantly and the coefficient value distribution (see figure~\ref{fig:burst_Chile_wavelet}) of graph wavelets, for northern regions of Chile is now in red spectrum.
+From the graph wavelet distributions in Figs. ~\ref{fig:absent_Chile_wavelet}~\ref{fig:burst_Chile_wavelet}, we can see that the kernel area of the absenteeism/burst wavelets cover most large negative/positive values.
+In this way, the wavelet identifies the abnormal negative/positive groups in absent/burst time intervals, respectively.
+Furthermore, a high correlation score of 0.726 was calculated for the wavelets from absenteeism and bursty periods of this episode.
+As a result, we note that there is a strong connection between the burst in activity and the previously observed absenteeism, signaling an event was detected.
+
+
+From the graph wavelets generated in absenteeism time period~\ref{fig:absent_Chile_wavelet}, we found the central node to be the city of `Iquique'.
+We study the timeseries (Fig.~\ref{fig:earthquake}) of Twitter activity for Iquique and word clouds (see Fig..~\ref{fig:earthquake-cloud}) generated from their content, to see how events unfolded during the course of the earthquake.
+Strong absenteeism is observed from 8:45 PM to 9:20 PM. We also checked  user mobility through geotagged tweets from city of Iquique, on April 1, 2014 and found that the user mobility fraction had increased by 15.4\%.
+
+\begin{figure}[t]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=1.4in, height=1.4in] {figures/Venuze_absent_zscore_3.png}
+		\label{fig:absent_Venezuela_score}
+	}
+	\subfigure[]{
+		\includegraphics[width=1.4in,height=1.4in] {figures/Venuze_absent_wavelet_3.png}
+		\label{fig:absent_Venezuela_wavelet}
+	}
+	\subfigure[]{
+		\includegraphics[width=1.4in,height=1.4in] {figures/Venuze_burst_zscore_3.png}
+		\label{fig:burst_Venezuela_score}
+	}
+	\subfigure[]{
+		\includegraphics[width=1.4in,height=1.4in] {figures/Venuze_burst_wavelet_3.png}
+		\label{fig:burst_Venezuela_wavelet}
+	}
+    \vspace{-2mm}
+	\caption{Power Outage in Venezuela. Above plots show differences in distributions of absenteeism score and wavelet coefficients calculated at 7:40 PM, December 2, 2013 (a-b) involving group absenteeism and later when burst in activity is captured at 8:45 PM in the same day (c-d), respectively.}
+\label{fig:case2_wavelet}
+\end{figure}
+
+
+\begin{figure}[th]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=3in,height=1.5in] {figures/Veneuela_power_count_all.png}
+		\label{fig:power}
+	}
+	\subfigure[]{
+		\includegraphics[width=3in,height=1.5in] {figures/power-English.png}
+		\label{fig:power-cloud}
+	}
+    \vspace{-2mm}
+	\caption{Caracas, Venezuela power outage, December 2, 2013. (a) Time series of tweets volume. (b) Word cloud of tweets mentioning `Caracas'.}
+\label{fig:case2}
+\end{figure}
+\textbf{Case Study 2: Massive power outage in Venezuela.}
+A massive power outage in Venezuela plunged several major cities including the capital city, Caracas in to darkness around 7:40 PM (local time) on December 2, 2013.
+News media reported~\footnote{http://www.usatoday.com/story/news/world/2013/12/\hskip0ex 02/\hskip0ex power-failure-caracas-venezuela/3823327/}, that the power outage lasted for 10-15 minutes, and the people of Caracas soon went out in the streets to protest.
+This action at the beginning of the episode coincides with the absenteeism period detected by our algorithm.
+The scatter plots showing distribution of absenteeism scores and wavelet coefficients (Figs.~\ref{fig:absent_Venezuela_score},~\ref{fig:absent_Venezuela_wavelet}) indicate that most of the low values are less than $0$.
+Shortly after the absenteeism, we detected a huge burst in activity around 8:45 PM, signaled by the increased z-scores (low absenteeism) and coefficient values (Figs.~\ref{fig:burst_Venezuela_score},~\ref{fig:burst_Venezuela_wavelet}).
+A correlation score of 0.617 was calculated on comparing the graph wavelets from both absentee and burst period.
+
+The absenteeism related graph wavelets indicated that the city of Caracas
+%`San Fernando de Apure'
+was the central node. Taking a close look at the twitter volume and tweets from Caracas and surrounding cities, we observed a sharp decline in user activity right around 7:40 PM and then a huge spike at starting at 8:45 PM.
+The word clouds of tweet content show a very similar story.
+The most dominant words are `light' and `blackout', even the Spanish phrase `sin luz' which means `no light' became a trending hashtag \#sinluz on Twitter.
+
+
+\textbf{Case Study 3: Christmas Day.}
+As mentioned earlier, an absenteeism behavior may not always lead to a spike in activity. In this case, our model detected strong absenteeism in social media activity for major holidays such as Christmas day, however it was not followed by a bursty period in Twitter activity. One explanation of this behavior is that people tend to travel back to visit family during the holidays. This is supported by low values of z-scores or high absenteeism in Figure~ \ref{fig:absent_Argentina_score} and wavelet coefficients in Figure~\ref{fig:absent_Argentina_wavelet} with respect to Argentinian tweets on December 25, 2013. Hence, no subsequent burst period was detected for this event.
+
+\begin{figure}[t]
+	\centering
+	\subfigure[]{
+		\includegraphics[height=1.5in] {figures/Argentina_absent_zscore_3.png}
+		\label{fig:absent_Argentina_score}
+	}
+	\subfigure[]{
+		\includegraphics[height=1.5in] {figures/Argentina_absent_wavelet_3.png}
+		\label{fig:absent_Argentina_wavelet}
+	}
+	\subfigure[]{
+		\includegraphics[width=2.7in,height=1.4in] {figures/holiday-cloud.png}
+		\label{fig:holiday-cloud}
+	}
+	\caption{The Christmas Day in Argentina: Above plots shows distributions of (a) absenteeism score and (b) wavelet coefficients calculated on December 25, 2013. (c) Time series comparing absenteeism score and user mobility corresponding to tweets between December 5, 2013 and December 25, 2013.}
+\vspace{-2mm}
+\label{fig:case3_wavelet}
+\end{figure}
+
+
+
+Interestingly as the Christmas day approached we observed (see Figure~\ref{fig:holiday-cloud}) that user mobility gradually increases and z-score decreases signaling greater absenteeism. We used Pearson's correlation coefficient to measure the two time series and found a correlation score of -0.94.
+\subsection{Why Absenteeism Group Detection?}
+Previous research has demonstrated the importance of burst detection in Twitter. In our study, we argue that group absenteeism can also be vital for detecting disruptive societal events. Modeling absenteeism is crucial, because it can serve as a surrogate signal for event detection. For example, in the case of the Iquique earthquake, where our algorithm  detected an absenteeism behavior on Twitter followed by a spike in user activity. Unlike traditional event detection methods which identify real time events only after they have occurred i.e., once the burst signal has been identified; the absenteeism signal can be observed much earlier, and it renders a foresight or view into the future events. Our approach thus offers a significant advantage over current strategies that focus solely on modeling spike or burst related patterns for event detection.
+
+%Disruptive events which cause Twitter absenteeism, but also render burst detection methods less useful. In the case of the Natal protest event, a large portion of people were walking on the street to protest, and the city's tweet absenteeism score reached a minimum. During the Brazil floods, the tweets tended to become inactive as the severity of the floods increased. It reached the lowest point when the flood was at its worst. In these two cases in particular, using a burst signal alone it can be difficult to identify such events.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% end %%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{table*}[th] %!htp
+% \renewcommand{\arraystretch}{1}
+% \caption{\label{table:list_events} Selected major events in South America countries}
+% \scriptsize
+% \centering
+% \begin{tabular}{ p{0.5cm}| p{2cm} | p{2.2cm} | p{2.2cm} | p{2.2cm} | p{2.5cm} | p{3cm} }
+%  \hline
+%  \textbf{No.} & \textbf{Events}& \textbf{ Absenteeism } & \textbf{Response time} & \textbf{Correlation}&\textbf{Central location} \\ [1ex]
+%  \hline
+%        1& Earthquake & 8:45 PM & 3 hours & 0.73 &Iquique, Chile\\
+%        2& Blackout & 7:40 PM & 1 hour & 0.81& Caracas, Venezuela \\
+%        3& holiday & one day & 2 days & 0.33 & \\        \hline
+% \end{tabular}
+%\end{table*}
+
+
+%Public holidays are typical events causing group absenteeism. One of the most dominant reason is, during public holidays, especially long-time holiday, people tend to travel, which resulting in a high level of local user mobility, and users' mobility will cause Twitter absenteeism accordingly.
+%We calculating more cases Pearson's correlation, and plot their distribution in Figure~\ref{fig:pearson}, of which the median value of correlation score is -0.88, and the average correlation score is -0.79. We can see the user mobility plays a forceful role in influencing Twitter absenteeism.
+
+%\subsection{Performance}
+%We use the data set on February 27, 2014, and set the time window as one day. We plot the comparison results from two aspects:  running time complexity, and parameter sensibility in figure~\ref{fig:performance},~\ref{fig:running_time},~\ref{fig:sensibility}.
+%\begin{figure}[ht]
+%	\centering
+%	\subfigure[matrix]{
+%		\includegraphics[width=1.55in,height=1in] {figures/performance1.png}
+%		\label{fig:performance1}
+%	}
+%	\subfigure[graph]{
+%		\includegraphics[width=1.55in,height=1in] {figures/performance2.png}
+%		\label{fig:performance2}
+%	}
+%	\caption{running time vs input parameter.}
+%	\label{fig:performance}
+%\end{figure}
+%\paragraph{Running time}From Figure~\ref{fig:performance}, we can see that the running time of minimal matrix approach increases extremely fast when $A$ is larger than 0.09. While in graph wavelet approach, the increasing speed is much stable as $d_{th}$ increases. This is because minimal matrix approach's time complexity is in proportion to $A^2$, while graph wavelet approach's time complexity is proportional to $d_{th}$. From Figure~\ref{fig:running_time}, we can see clearly that for the minimal matrix algorithm, the running time complexity also increase sharply with the input size $n$, while in graph wavelet approach, the increase speed is moderate. This is because the minimal matrix approach's timing complexity is $O(N^3)$, while graph wavelet approach's time complexity is $O(N^2)$. Thus, the graph wavelet approach is better  than minimal matrix approach in term of running time for a larger absenteeism group.
+%\begin{figure}[h]
+%	\centering
+%	\subfigure[matrix]{
+%		\includegraphics[width=1.55in,height=1in] {figures/running_time1.png}
+%		\label{fig:running1}
+%	}
+%	\subfigure[graph]{
+%		\includegraphics[width=1.55in,height=1in] {figures/running_time2.png}
+%		\label{fig:running2}
+%	}
+%	\caption{Running time vs input size.}
+%	\label{fig:running_time}
+%\end{figure}
+%\paragraph{Parameter sensibility}In minimal matrix approach, set the input parameter as $A$, and the optimal absenteeism group as $P_{min}$. When $A$ is changed to $A$', the optimal absenteeism group is changed to $P_{min}$, define the output error as the city number that exists in $P_{min}$ but not in $P_{min}'$, and denoted as $P_{min}-P_{min}'$. We define the parameter sensibility as: $$sensibility=\frac{{|P_{min}-P_{min}'|}/{|P_{min}|}}{|A-A'|/{A}}.$$ We plot the minimal matrix approach and graph wavelet approach's sensibility in Figure~\ref{fig:sensibility}. In the minimal matrix approach, when the input parameter error is smaller than 20\%, the output absenteeism group error is less than 5\%. While in the graph wavelet approach, the output absenteeism group error is linear to the input error parameter. This is probably because minimal matrix approach aggregates all the absenteeism score covered by the region, and usually has a much larger city number than the graph wavelet approach, and makes minimal matrix approach better at anti-noise.  All in all, the minimal matrix algorithm focuses on all the cities in the cover group, and has a better global performance at anti-noise, while is inferior to the graph wavelet counterpart in term of running time complexity.
+%\begin{figure}[h]
+%	\centering
+%	\subfigure[matrix]{
+%		\includegraphics[width=1.55in,height=1in] {figures/sensibility1.png}
+%		\label{fig:sensibility1}
+%	}
+%	\subfigure[graph]{
+%		\includegraphics[width=1.55in,height=1in] {figures/sensibility2.png}
+%		\label{fig:sensibility2}
+%	}
+%	\caption{Sensibility comparison of the two algorithms.}
+%	\label{fig:sensibility}
+%\end{figure}
+
+
+
+
+% % % % % % % % % % % % % the end% % % % % % % %
+%
+%\begin{figure}[ht]
+%	\centering
+%	\subfigure[]{
+%		\includegraphics[width=1.55in,height=1in] {figures/Curitiba-Brazil1-cloud.png}
+%		\label{fig:holiday}
+%	}
+%	\subfigure[]{
+%		\includegraphics[width=1.55in,height=1in] {figures/pearson1.png}
+%		\label{fig:pearson}
+%	}
+%	\caption{(a) User mobility time series and corresponding absenteeism score, from Dec 5, 2013 to Dec 25, 2013. (b) Pearson correlation score distribution of user mobility and absenteeism score.}
+%\label{fig:case3}
+%\end{figure}
+
+%Now we show experimental results of our algorithm on highlighted case studies (see Table~\ref{table:list_events}):
+%
+%\begin{table*}[th] %!htp
+%	\renewcommand{\arraystretch}{1}
+%	\caption{\label{table:list_events} Selected major events in South America countries}
+%	\scriptsize
+%	\centering
+%	\begin{tabular}{ p{0.5cm}| p{1.5cm} | p{8cm} | p{1.5cm}}
+%		\hline
+%		\textbf{No.} & \textbf{Date}& \textbf{ Events} & \textbf{Test Areas}   \\ [1ex]
+%		\hline
+%        1& 2013-06-17 & Brazilian Spring: Protests in over 100 cities, over 2 million people & Brazil  \\		
+%        2& 2013-12-02 & Power cut leaves much of Venezuela without electricity & Venezuela \\
+%        3& 2013-12-24 & Floods, more than 50,000 people are forced to flee their homes & Brazil\\
+%        4& 2013-12-25 & Christmas holiday  & Argentina \\
+%        5& 2013-12-30 & Power supply disrupted in heatwave in Buenos Aires, Argentina & Argentina \\
+%        6& 2014-04-01 &  M8.2 earthquake struck off the coast of Chile, epicenter is Iquique & Chile  \\
+%        7 & 2014-05-21 & Bus strike paralyzes Brazil's biggest city as World Cup looms & Brazil \\			\hline
+%	\end{tabular}
+%\end{table*}
+
+
+%The wavelet scales $t_j$ are selected to be logarithmically equispaced between the minimum and maximum scales $t_J$ and $t_1$, with the upper bound $\lambda_{max}$ of the spectrum of $L$. The placement of the maximum scales $t_1$ as well as the scaling function kernel $h$ will be determined by the selection of $\lambda_{min}=\frac{\lambda_{min}}{K}$, where $K$ is a design parameter of the transformation. We then set $t_1$ so that $g(t_1x)$ has power-law decay for $x>\lambda_{min}$, and set $t_J$ so that $g(t_Jx)$ provides monotonicity of the polynomial for $x < \lambda_{max}$. This is achieved by $t_1=\frac{x_2}{\lambda_{min}}$, and $t_J=\frac{x_2}{\lambda_{max}}$. For the scaling function kernel we take $h(x)=\gamma exp(-({{\frac{x}{\lambda_{min}}}})^4)$, where $\gamma$ is set such that $h(0)$ has the same value as the maximum value of $g$.
+%
+%At each time point the graph has an Z-score vector $f$ and when we get the lowest value for function $< \psi_{t,n},f>$ the corresponding wavelet $\psi_{t,n}$ is reported as an absenteeism pattern.
+

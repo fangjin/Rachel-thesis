@@ -1,0 +1,208 @@
+%
+% PROJECT: <ETD> Electronic Thesis and Dissertation Initiative
+%   TITLE: LaTeX report template for ETDs in LaTeX
+%  AUTHOR: Neill Kipp, nkipp@vt.edu
+%     URL: http://etd.vt.edu/latex/
+% SAVE AS: etd.tex
+% REVISED: September 6, 1997 [GMc 8/30/10]
+%
+
+% Instructions: Remove the data from this document and replace it with your own,
+% keeping the style and formatting information intact.  More instructions
+% appear on the Web site listed above.
+
+\documentclass[12pt,dvips]{report}
+
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.5in}
+\setlength{\evensidemargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{0in}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.1in}
+
+% Uncomment for double-spaced document.
+% \renewcommand{\baselinestretch}{2}
+
+% \usepackage{epsf}
+\usepackage[pdftex]{graphicx}
+\usepackage{import}
+
+\usepackage{subfigure}
+\usepackage{mathrsfs}
+\usepackage[normalem]{ulem}
+\usepackage{array}
+%\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{caption}
+
+%\usepackage{xcolor}
+%\usepackage{url}
+%\usepackage{underscore}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+\newcommand{\argmin}{\arg\!\min}
+\newcommand{\argmax}{\arg\!\max}
+
+\begin{document}
+
+\thispagestyle{empty}
+\pagenumbering{roman}
+\begin{center}
+
+% TITLE
+{\Large
+%Four Problems in Information Diffusion \\ over Social Networks
+Mass Movements and their Adoption in Social Networks
+}
+%Temporospatial Information Propagation in Social Networks
+%Information Transition, Propagation and Absenteeism in Social Networks
+%Event Classification, Detection and Prediction based on Information Diffusion in Social Networks
+
+
+\vfill
+
+Fang Jin
+
+\vfill
+
+Dissertation submitted to the Faculty of the \\
+Virginia Polytechnic Institute and State University \\
+in partial fulfillment of the requirements for the degree of
+
+\vfill
+
+Doctor of Philosophy \\
+in \\
+Computer Science and Applications
+
+\vfill
+
+Naren Ramakrishnan, Chair \\
+Chang-Tien Lu \\
+Chris North \\
+Yang Cao \\
+Feng Chen
+
+\vfill
+
+May 30, 2016 \\
+Arlington, Virginia
+
+\vfill
+
+Keywords: Information Propagation, Absenteeism, Event Detection, Social Networks
+\\
+Copyright 2016, Fang Jin
+
+\end{center}
+
+\pagebreak
+
+\thispagestyle{empty}
+\begin{center}
+
+{\large
+%Four Problems in Information Diffusion over Social Networks
+Mass Movements and their Adoption in Social Networks
+}
+
+\vfill
+
+Fang Jin
+
+\vfill
+
+(ABSTRACT)
+\vfill
+
+\end{center}
+As social media (e.g., Twitter) continues to increase in popularity, they are becoming mainstream venues to stage mass movements, such as protests and uprisings. In an effort to understand and predict those movements, social media is regarded as valuable social sensor to disclose the underlying behavior and pattern. To fully understand the mass movement information propagation pattern in social networks, several problems need to be considered and addressed. Specifically, modeling mass movements that incorporate (i) multiple spaces (ii) dynamic network structure (iii) swift outbreak/slowly evolving transmission (iv) misinformation would be highly propitious in understanding information propagation in social medias.
+
+This dissertation explores four research problems underlying mass movement adoption in social media. First, how do mass movements get mobilized on Twitter, especially in a specific geographic area. Second, how do we detect protest activity in social networks by observing group abnormality in graph? Third, how can we infer the causality of a specific type of protest, say climate related protest? Fourth, how do we distinguish real movements from rumors or misinformation campaigns?
+
+A fundamental objective of this research has been to comprehensively study the mass movement adoption in social networks, it may cross multiple spaces, it may evolve with dynamic network structures, it can be swift outbreaks or long term slowly evolving transmissions, what is more, it may mixed with misinformation campaigns. Each of those issues requires the development of new mathematical models and algorithmic approaches which are explored here.  It is my hope that this work will facilitate advancements in information propagation, group abnormality detection and misinformation distinction, and ultimately helps improve the understanding of mass movement and their adoptions in social networks.
+
+%As social media (e.g., Twitter) continues to increase in popularity, it is becoming employed
+%as a social sensor into real-world events. Most current research focuses on
+%{\it massive} information transmission patterns that might correlate to world events.
+%In this proposed work, we focus on four less-studied problems in information
+%diffusion over social media. In contrast to popular memes, they constitute
+%{\it rare}, {\it localized}, {\it absent}, and/or {\it slowly evolving} transmission paterns.
+%(i) First, how does misinformation spread, i.e.,
+%rumors, innuendo, and falsehoods? (ii) Second, how do mass movements get mobilized
+%on Twitter, especially in a specific geographic area, (iii) Third, how do we detect
+%absenteeism in social network activity and how can this information be employed?
+%and (iv) Fourth, how do social
+%networks enable the study of long-running, slowly evolving, societal phenomena (e.g., awareness
+%of climate change)?
+%Each of these issues requires the development of new mathematical models and algorithmic
+%approaches which are explored here. Applications are drawn from the worlds of politics,
+%civil unrest, and natural disasters.
+
+
+
+\vfill
+
+% GRANT INFORMATION
+
+%This work was supported by the Intelligence Advanced Research Projects Activity (IARPA) via Department of Interior National Business Center (DoI/NBC) contract number D12PC000337. The US Government is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon. The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of NSF, IARPA, DoI/NBC, or the US Government.
+
+\pagebreak
+
+% Dedication and Acknowledgments are both optional
+%\chapter*{Dedication}
+
+\chapter*{Acknowledgments}
+I would like to acknowledge and express my gratitude to several individuals for their contributions and support through my years as a doctoral student.
+
+My advisor, Naren Ramakrishnan, for giving me the independence to pursue my research interests. I am especially grateful for his advice and wisdom over the past four years.
+
+My doctoral committee - Chang-Tien Lu, Yang Cao, Chris North, Feng Chen - for their valuable
+comments, guidance and encouragement.
+
+
+\tableofcontents
+\pagebreak
+
+\listoffigures
+\pagebreak
+
+\listoftables
+\pagebreak
+
+\pagenumbering{arabic}
+\pagestyle{myheadings}
+
+\subimport{ch1/}{ch1.tex}
+\subimport{ch2/}{ch2.tex}
+\subimport{ch3/}{ch3.tex}
+\subimport{ch4/}{ch4.tex}
+\subimport{ch5/}{ch5.tex}
+\subimport{ch6/}{ch6.tex}
+\subimport{ch7/}{ch7.tex}
+
+
+
+% If you are using BibTeX, uncomment the following:
+% \thebibliography
+%
+% Otherwise, uncomment the following:
+% \chapter*{Bibliography}
+
+\bibliographystyle{abbrv}
+%Warning: don't put space after the comma in the following commands
+\bibliography{bib/intro,bib/rumor,bib/ebola,bib/GBM,bib/wavelet,bib/pnas-sample}
+
+% \appendix
+
+% In LaTeX, each appendix is a "chapter"
+% \chapter{Program Source}
+
+
+\end{document}
