@@ -1,0 +1,157 @@
+\chapter{Related Work}
+\label{ch:related}
+
+Related work falls in three areas.
+
+\section{Information Propagation}
+\par \noindent
+{\bf Social movements:}
+Oliver and Myers~\cite{oliver1998diffusion} develop a foundation for theoretical insights of social movements and describe the limitations of simplified models. The Arab Spring of  2010
+served as a context for many researchers~\cite{gonzalez2011dynamics, bond201261, tufekci2012social, conover2013digital, saad2013mass} to study the role social networking sites play in the spread and recruitment of participants in protests. A detailed anatomy of modern social protests is described by Saad-Filho~\cite{saad2013mass} with the June 2013 anti-government protests in Brazil as a context.
+In this work, we study the processes and sociological impacts of protests in the modern era, fortified by online social networks and the communities in and around them.\\
+
+
+\noindent
+{\bf Information diffusion in networks:}
+Previous studies have approached the modeling of information propagation and diffusion in social networks through several means, e.g., contagion models (SIR~\cite{castellini2007propagation}\, SISa~\cite{hill2010emotions}), diffusion based threshold and cascade models~\cite{kempe2003maximizing}, coverage models~\cite{singer2012win}, and survival theory~\cite{rodriguez2013modeling}. Other significant work has gone into~\cite{Cha10measuringuser,Kwak:2010:TSN:1772690.1772751,Romero:2011:DMI:1963405.1963503,Yang_predictingthe}.
+Recently, Matsubara etc.~\cite{matsubara2012rise}
+conducted research on the rise and fall patterns of information diffusion, and managed to
+capture the power-law fall pattern and periodicities inherent in such data.
+Gomez-Rodriguez et al.~\cite{GomezRodriguez:2010:IND:1835804.1835933}
+built a cascade transmission model to track cascading process taking place over a network; they traced overall blogs and news for a one-year period and found that the top 1000 media sites and blogs tend to have a core-periphery structure. A good survey of
+different models of information diffusion is presented in~\cite{guille2013information}.\\
+
+
+
+\noindent
+{\bf External influences:}
+We believe that the effects of influences that originate external
+to the observed diffusion network, such as mass media
+and offline spread of information, can impact the way in which information
+flows within the online network.
+Myers et al.~\cite{myers2012information} study the emergence of URLs
+on Twitter with a probabilistic generative process using both
+internal and external exposure curves in a contagion-like model.
+Similar attention to the role of external factors is
+paid by Crane and Sornette~\cite{crane2008robust} for
+tracking the popularity of YouTube videos using a diffusion model.
+Iwata et al.~\cite{iwata2013discovering} use
+a shared cascade Poisson process model to discover
+latent influences in social activities such as item adoption.
+Using shared parameters among multiple Poisson processes, they were able to simulate sequences of item adoption events. \\
+
+
+\noindent
+{\bf Brownian motion:}
+Zhou and colleagues (e.g.,~\cite{zhou2003distance, zhou2003network,
+zhou2004network}) develop the notion of Brownian motion on networks
+which they
+use to discover communities of hierarchical structure both locally
+and globally. We extend this approach in this chapter
+to formulate a propagation algorithm based on geometric Brownian
+motion (GBM). Borrowed from statistical physics, GBM has been
+used heavily in finance to model stock price movements.
+Scale invariance and the ability to model abrupt bumps
+along propagation paths are the primary motivations for using GBMs
+to model stochastic processes~\cite{tankov2004financial}. \\
+
+\noindent
+Our work builds on the concepts
+introduced in~\cite{zhou2003network, iwata2013discovering, zhou2003distance, zhou2004network} but differs from the other diffusion models
+described earlier by considering both the role of communities of
+users and the abrupt nature of propagation of volatile information such as mass social protests. We include the notion of bispace where both latent (attributed to external influences) and observed user network influences are considered. We infer propagation rates for communities in the observed network and allow
+implicit recruitment of users into protest actions through a Poisson process.
+
+
+\section{Event Detection}
+The relevant methods can be classified into three categories: geographical topic modeling, group abnormality, and graph wavelet.
+
+\paragraph{Geographical topic modeling}
+Event detection based on social networks is a research area that has attracted significant attention in the last years. Traditional approaches focus on capturing spatiotemporal burstiness of keywords~\cite{lappas2009burstiness,lappas2012spatiotemporal}, Kalman filtering to track the geographical trajectories of hot spots of tweets related to earthquakes~\cite{sakaki2010earthquake}; detecting topics of interest that are coherent in geographic regions~\cite{eisenstein2010latent,hong2012discovering,yin2011geographical}; applying clustering-based approaches search for emerging clusters of documents or terms using predefined similarity metrics that consider factors such as term co-occurrences and social interactions~\cite{aggarwal2012event,sayyadi2009event,watanabe2011jasmine,weng2011event}; and using the notion of compactness of a graph~\cite{rozenshtein2014event} to detect events. Several statistical methods have also been used, based on Kulldorff  spatial scan statistic~\cite{kulldorff1997spatial}, to detect spatial outliers~\cite{chen2008detecting} and have been applied to a wide variety of domains including transportation networks, civil unrest forecasting~\cite{zhao2014unsupervised}, and heterogeneous social media graphs~\cite{chen2014non}.
+
+\paragraph{Group abnormality}
+Our approach to event detection problem is conceptually different from above mentioned studies. It includes a graph-theoretic framework to detect absenteeism related anomalies and correlate them with future events. Although group absence behavior has been widely studied in the area of organizational behavioral studies~\cite{gaudine2001effects,seamonds1982stress,chi2015ghost}, it remains unexplored in the area of social network analysis. Resembling closely to group anomaly detection in complex networks, our detection approach is further distinguished by its focus on groups rather than individuals. Existing approaches to group anomaly detection include building generative models of group anomalies~\cite{xiong2011hierarchical,yu2014glad} where the goal is to automatically infer the groups and detect group anomalies in a social network. Typical to mixture models such methods suffer from high computational complexity due to the size of data and are heavily parameterized.
+
+\paragraph{Graph wavelet}
+One of key challenges of our research problem is adapting the detection procedure for both missing and bursty activity groups. For this purpose, we incorporate spectral graph wavelets~\cite{hammond2011wavelets} into our algorithm. This strategy has been quite effectively used in multiscale community mining~\cite{tremblay2014graph}.
+Wavelet methods based on spectral graph theory have been applied in a wide array data mining areas such as community detection, anomaly detection~\cite{calderara2011detecting} and other machine learning tasks~\cite{shuman_ACHA_2013,ghosh2003wavelet,rustamov2013wavelets,2000wavecluster}. Recently~\cite{shuman2015spectrum} proposed a tight graph wavelet which can represent signals residing on weighted graphs and adapt to the distribution of graph Laplacian eigenvalues.
+By constructing wavelets over graphs we are able take advantage of local information encoded in graph structure and then cluster and identify nodes which are similar in a scale-dependent fashion.
+
+%The relevant methods can be classified into three categories: burst detection, geographical topic modeling, and clustering. Burst detection methods search for space-time regions that have abnormally high counts of some predefined terms~\cite{lappas2009burstiness,lappas2012spatiotemporal}. Sakaki et al. consider spatial-temporal Kalman filtering to track the geographical trajectories of hot spots of Tweets related to earthquakes~\cite{sakaki2010earthquake}. Geographic topic modeling based methods detect topics of interest that are coherent in geographic regions~\cite{eisenstein2010latent,hong2012discovering,yin2011geographical}. Clustering-based approaches search for emerging clusters of documents or terms using predefined similarity metrics that consider factors such as term co-occurrences and social interactions~\cite{aggarwal2012event,sayyadi2009event,teitler2008newsstand,watanabe2011jasmine,weng2011event}.
+
+
+\section{Rumor Detection}
+
+%\paragraph{Information Diffusion}
+%Significant work has gone into research on information diffusion on
+%social media, e.g., see~\cite{Cha10measuringuser,Kwak:2010:TSN:1772690.1772751,Romero:2011:DMI:1963405.1963503,Yang_predictingthe}.
+%Recently, Matsubara etc.~\cite{matsubara2012rise}
+%conducted research on the rise and fall patterns of information diffusion, and managed to
+%capture the power-law fall pattern and periodicities inherent in such data.
+%Gomez-Rodriguez et al.~\cite{GomezRodriguez:2010:IND:1835804.1835933}
+%built a cascade transmission model to track cascading process taking place over a network; they traced overall blogs and news for a one-year period and found that the top 1000 media sites and blogs tend to have a core-periphery structure.
+
+\paragraph{Epidemiological models}
+Mathematical modeling of disease spread not only provides vital information about the propagation of the disease in a human network, but also offers insight into the strategies that can be used to control them.
+%Kermack and McKendrick~\cite{Kermack1927Royal} study the effect of various factors that govern the spread of contagious epidemics in a population and are considered as one of the pioneers in this area. Later, Daley et al. \cite{Daley-nature-1964} suggested an analogy between the spread of disease and the dissemination of information and used epidemiological models to describe the growth and decay of rumor spreading processes. They divided the population into three mutually exclusive classes based on their dissemination of a rumor: have not heard it,
+%are actively spreading it, and have stopped spreading the rumor.
+%%This %division of the human population allowed them to apply the
+%Kermack-McKendrick epidemic model to the propagation of a rumor.
+The classification of the human population into different groups forms
+the basic premise of using epidemiological models for modeling
+information diffusion.
+The two widely used such models are SIR (Susceptible, Infected, Recovered) and SIS (Susceptible, Infected, Susceptible) models. Newman et al.~\cite{PhysRevE.66.016128} showed that a large class of standard
+epidemiological models, viz. the SIR models, can be solved exactly on a wide variety of networks, and confirmed the correctness of solutions with numerical simulations of SIR epidemics on networks. Kimura et al.~\cite{Kimura:2009:EEI:1661445.1661772} proposed the application
+of the SIS model to study information diffusion where the nodes can be activated multiple times.
+%In our chapter, we also applied SIS model for news and rumor spreading over Twitter.
+%They created a layered graph from the social network where layers gets added on top of each other and then apply bond percolation with a pruning strategy with an intent to lower the computational complexity of the SIS model.
+% \cite{Alison2010-Society} use a modified SIS model to prove emotions spreads very much like an infectious disease.
+%tried to evaluate the spread of long-term emotional states across a social network using a modified SIS model which included the possibility of spontaneous infection. They were able to provide evidence that emotions spreads very much like an infectious disease.
+Zhao et al.~\cite{RePEc:eee:phsmap:v:392:y:2013:i:4:p:987-994} proposed an SIHR (Spreaders, Ignorants, Hibernators, Removed) rumor spreading model,
+with forgetting and remembering mechanisms to simulate rumor spreading in inhomogeneous networks.
+Xiong et al.~\cite{Xiong20122103} proposed a diffusion model with four different states: susceptible, contacted, infected, and refractory (SCIR) to identify the threshold value of the spreading rate approaches almost zero.
+%They study information diffusion on Twitter using the retweeting mechanism.
+%There were able to identify that the threshold value of the spreading rate approaches almost zero and that the degree-based density of infected agents increases with the degree monotonously.
+Bettencourt et al.~\cite{powerofgoodidea:2006} proposed the SEIZ (susceptible, exposed, infected, skeptic) model to capture the adoption of Feynman diagrams by using the publication counts after World War II. They extract the general features for idea spreading and estimate the idea adoption process. Their result showed that
+the SEIZ model can fit the long term idea adoption process with reasonable error, but does not demonstrate whether this model can be applied on large scale datasets, or whether can be applied on Twitter, where the story unfolds in real-time.
+
+\paragraph{Rumor modeling}
+As far as we know, Daley~\cite{Daley-nature-1964} first proposed the similarity between epidemics and rumors using mathematical analysis. Some researchers have studied rumor propagation modeling in different network topologies~\cite{nekovee2007theory,zanette2002dynamics}; however,
+they do not provide any discussion of propagation differences between news and rumors.
+Shah et al.~\cite{shah2011rumors} detect rumor sources in network using maximum likelihood modeling.
+In~\cite{budak2011limiting}, Budak et al. prove that minimizing the spread of the misinformation (i.e., rumors)
+in social networks is an NP-hard problem and also provide
+a greedy approximate solution. Castillo et al.~\cite{castillo2011information} delve into twitter content modeling, such as sentiment analysis and
+hashtags to identify rumors, while Qazvinian et al.~\cite{qazvinian2011rumor} try to address this issue using broader linguistic methods,
+to learn possible features of rumor and determine whether a twitter
+user believes a rumor or not. More related work appears
+in~\cite{Isham-physica-2009,PhysRevE.81.056102}. Our goal is to develop an understanding of
+these processes using diffusion models.
+%
+%Trpevski et al. \cite{PhysRevE.81.056102} used the SIS model to study how two different rumors propagate in a network, Zhou et al.~\cite{Zhou2007458} studied rumor propagation in complex networks using the SIR model, while Zhao et al \cite{RePEc:eee:phsmap:v:392:y:2013:i:4:p:987-994} proposed a modified SIR model where they assumed that ignorants will inevitably change their status to either spreaders or stiflers after getting contacted by the spreaders, and Ishama et al. \cite{Isham-physica-2009} try to find the final size of a rumor on a homogeneous network using the stochastic SIR epidemic model, where they applied embedded Markov chain techniques to derive a set of equations that can be solved numerically to identify the spread of a rumor.
+%These two rumors are initiated with different probabilities of acceptance. They found that one of
+%the rumors is typically more dominant in the network compared to other.
+%However, all their research works are based on simulation modeling whereas our work here are trying to model actual news and rumor propagation on Twitter.
+%
+% Compared with our approach, we are trying to identify rumors from diffusion properties, via an extended epidemic model SEIZ \cite{powerofgoodidea:2006}, from which we can get a ratio of the rate at which people get exposed (and not believe) to the rate at which people move from exposed to belief. We think the different distributions of the max ratio might shed some light on news and rumor detection. while they didn't address the dynamic rumor propagation models in twitter.
+%\narenc{is it skeptics or is it skeptic? Pick one and stick with it.}
+
+%\narenc{The related work in general is very poorly written. It reads like this:
+%
+%A et al.. did this.
+%B et al. did this.
+%C et al. did this.
+%
+%There is no structure, no organization. You need a good story. The sentences
+%have to be more tightly linked. Look at some of my chapters to get
+%an idea. You don't need 1 sentence for each chapter. You can group chapters
+%further and cite them together. For instance: Some chapters [CITE1, CITE2]
+%take the approach of WHATEVER. The whole related work must be in 1 page
+%but without losing any citations. }
+
+%\narenc{Looks like this is not just
+%tweet news dataset. It contains both news and rumors. And it is not
+%a dataset. It is many datasets. You can just call it Tweet datasets studied
+%in this chapter. Replace 'Real' by 'Type' so that the types are
+%News and Rumor, not True and Rumor. Remove Lang, Collection columns.}
+

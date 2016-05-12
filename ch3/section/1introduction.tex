@@ -1,65 +1,95 @@
-\section{Introduction} \label{sec:intro}
-Social microblogs such as Twitter and Weibo are experiencing explosive growth, with billions of users globally sharing their daily status updates online.
-For example, Twitter has more than 255 million average monthly active users (78\% from mobile) as of March 31, 2014, and an estimated increase of 25\% per year\footnote{http://solomozone.com/tag/revenues/}.
-Various studies have shown that Twitter is viable as a social ``sensor'', and holds great promise for detecting and forecasting significant societal events~\cite{bugel2013multilingual,sakaki2010earthquake}.
-In recent years, a significant body of research~\cite{aggarwal2012event,hong2012discovering,lappas2009burstiness,lappas2012spatiotemporal,sakaki2010earthquake,sayyadi2009event,watanabe2011jasmine,weng2011event,yin2011geographical} has focused on modeling bursts and increases of user activity in social media.
+% mainfile: ../main.tex
+\section{Introduction}
+This chapter was published in the 20th ACM SIGKDD international
+conference on Knowledge discovery and data mining (KDD 2014)~\cite{jin2014misinformation}.
 
-However, real world events are not only correlated with burst signals, but can also exhibit unusually low levels of activity in social networks.
-As shown in Figure 1, a protest in the city of Natal, Brazil began at 5:00 PM (local time) at the Museum of the Republic, with people gradually joining the demonstration. %\footnote{http://www.jb.com.br/pais/noticias/2013/06/17/manifestantes-invadem-cobertura-do-congresso-nacional-em-brasilia/}.
-On Twitter, there was an uncharacteristic lull in activity or {\it group absenteeism} behavior from 6:00 PM---8:00 PM on the same day.
-%Another example comes from December 24, 2013, southern Brazil experienced widespread flash floods. According to news sources, more than 50,000 people were forced to flee their homes in Minas Gerais and Espirito Santo, in the southern states of Brazil. Immediately following the floods, Twitter activity in this region dropped by 51\%, and reached its lowest point that evening.
-%Other examples of \textit{group absenteeism} that we observed from Latin American Twitter activity include bus strikes in Brazil on May 21, 2014, the Iquique earthquake in Chile on April 1, 2014, and a major power supply disruption in Argentina on December 30, 2013.
+In recent years social networking sites have provided not just a platform for communication but also a means of mobilization and strategic interaction between key players
+of social movements, e.g., protests. Traditionally social movements occur
+within a subset of the population and have spread through on-the-ground
+communities and unions. With the advent of leaner communication
+technologies like Twitter, the way such movements form and
+spread through modern society has changed. With Twitter, in particular,
+traditional slogans have transformed into hashtags which can
+offer a consistent way of communicating the reason and
+motivation of social movements like protests and uprisings.
 
-
-
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
-\includegraphics[width=4.5in]{figures/Natal_example1.png}
-\caption{Detected group absenteeism in Natal, Brazil beginning at 6:00 PM on June 17, 2013. This absenteeism event coincides with a large protest that happened in the region.}
-\label{fig:natal-protest}
+\includegraphics[scale=0.4]{figures/mexico_teacher_protest.png}
+\caption{Mexico teacher protest events from Sep 1 to Sep 7, 2013. The blue pins denote protest cities; the numbers in red denote the sequence of
+protests as they spread across the country.}
+\label{fig:mexico_teacher}
 \end{figure}
 
 
-Investigating this phenomenon of unusually calm behavior online holds enormous potential for understanding localized, disruptive societal events.
-In this paper we focus on absenteeism based event detection, and introduce this important topic as a key data mining
-task for social media analytics.
-An \textit{absenteeism} event in social networks can be defined as an event which is characterized by a significant lull in activity such as a sudden, sharp decrease of Twitter volume within a short period of time (and which  often precedes a major burst in re-activity).
-This paper presents the first study to systematically investigate group absenteeism in LBSNs.
-Using graph wavelet techniques, we pose this problem as one of group anomaly detection.
-To appropriately incorporate absenteeism concepts into our detection approach, we must first address the following questions:
+In this chapter, we focus on Twitter's
+user networks during protests
+and similar civil unrest activities in Latin America. Our goals
+are to model the propagation and growth of contagion-like protest
+waves within a social network and to understand the social and
+structural dynamics underlying such phenomena. The key problem
+is understanding the nature of information propagation among motivated
+users of a social network. We have observed that such mass
+protests emerge very swiftly and sharply. In Twitterspeak, they
+would be considered trending but most such trends quickly decline
+on the social network even if not in the physical world. Modeling
+protest-related topic propagation on networks involves several challenges.
+
+First, social protest propagation through online media can spread
+over large areas more quickly than traditional
+methods since users are geographically distributed. For example,
+on September 1, 2013, the Mexican government's education reform bill drew
+the wrath of teachers country-wide who opposed the reform
+(which required regular assessments of their performance as educators).
+Twitter was a virtual loudspeaker, providing a platform for organization
+and strategization for teachers to put forth their arguments against
+the bill. A series of mass teacher protests erupted and spread
+from city to city. As shown in Fig.~\ref{fig:mexico_teacher}, we
+see the movement spreading over time to different locations with
+no obvious visual mobilization pattern. The second challenge is
+that Twitter's user network embodies many subgraphs based on
+social ties which might afford different propagation rates due to
+subgraph-specific structures.
+
+Thus identifying how the cause of a protest is adopted by Twitter users and how mobilization happens in the underlying network is a difficult task.
+To address this problem we present an integrated framework with new
+theoretical models as well as empirical validation on real Twitter
+data for actual protests witnessed in the recent past. Our key
+contributions are:
+
+\iffalse
+We also focus on the role of community driven information propagation over this bispace. We use \textit{Geometric Brownian Motion} (GBM) and Poisson processes over the mentions network and latent space respectively to model information propagation during mass social movements. When the protest-related information propagation starts, it propagates over the two spaces independently and simultaneously. In the mention network space, the propagation process follows Geometric Brownian diffusion over the defined social network. In the latent space, we believe propagation will obey the Poisson distribution. We introduce a trust function $S_t$ and Brownian distance $d_{ij}$ between users to describe the information propagation mechanism of the mentions network. Suppose that some user $v_i$'s trust with user $v_j$ at time $t$ is $S^{ij}_t$ and the distance from user $v_i$ to user $v_j$ is $d_{ij}$. Only when $ln(S^{ij}_t)$ is no less than the distance $d_{ij}$ is $v_j$ infected by $v_i$.
+%We propose that the trust function $S_t$ follows a dynamic geometric Brownian motion
+%\begin{equation}\frac{\partial S_t}{S_t} = \mu {dt}+\sigma dW_t
+%\end{equation}
+
+
+In the latent space, we model the propagation as a Poisson distribution, believing that it is difficult to account for all the ways in which information may spread. For a given time interval $T_p$, the probability of infecting users is expressed as $Pr(x=k)=\frac{\lambda^k e^{-\lambda}}{k!}$ where $\lambda$ is the average number of infected users during that time interval $T_p$.
+\vspace{2 mm}
+\fi
 
 \begin{itemize}
-\item What scale should we select to model the absenteeism groups? %Which node should be the central point?
-    
-\item What is the most efficient approach to select absenteeism groups that are spatially and temporally localized?
-    
-\item How do we model an absenteeism signal for event detection? Even though we have clear examples of real world events which can explain the observed absenteeism, not all absenteeism occurrences can be associated with underlying events. Therefore we must be able to differentiate absenteeism from noisy signals for event detection.
+\item
+We model the inherent heterogeneity in propagation using a
+bispace model, comprised of the Twitter mentions network (where
+both globally and locally influential neighbors contribute to a user's
+recruitment) and a
+latent space (where external exposure to protest-related information is
+captured).
+\item We focus on the role of community-driven information propagation
+over the bispace model. We use geometric Brownian motion (GBM)
+over the mentions network and Poisson processes over the latent space to model information propagation during mass social movements.
+\item We illustrate the effectiveness of our approach in modeling several key mass protest adoption scenarios in multiple countries of Latin America, viz.
+Argentina, Brazil,
+Colombia,
+Mexico,
+Uruguay, and
+Venezuela.
+
 \end{itemize}
 
-Graph wavelets display two outstanding advantages to study the above
-questions: scalability and low computational complexity.
-In this scenario, the data objects are embedded in a general graph as vertices.
-By employing wavelet transforms on the graph, we can construct a wavelet function with a graph structure, and we are able to select absenteeism groups at different scales.
-Lastly, we propose a two-pass group anomaly detection method that first detects absenteeism, and then checks if there is a subsequent burst in activity within a specific time period.
-By comparing correlations between the wavelet coefficients of both of these groups, we are able to relate observed absenteeism to a possible real world event.
-
-Our contributions are thus:
-
-\begin{itemize}
-\item To the best of our knowledge this is the first study to modeling group absenteeism as a basis for event detection.
-%Even though burst has been extensively discussed in previous work, however, the absenteeism has different patterns and plays an irreplaceable role in event detection.
-
-\item We incorporate graph wavelets as a mechanism to detect the most anomalous subgraphs at different scales. We demonstrate how this is a powerful technique for social media analytics.
-
-\item We propose a novel two-pass event detection method that uses correlation scores between the group depicting \textit{absenteeism} and the group demonstrating increased activity to probabilistically determine the likelihood of an event.
-\end{itemize}
-
-The rest of the paper is organized as follows. Section~\ref{sec:related} reviews related work and existing methodologies and Section~\ref{sec:preliminaries} formalizes the research problem. In Section~\ref{sec:algorithm}, we first discuss the graph wavelet formalism for group absenteeism detection, and subsequently demonstrate how it can be used for two-pass event detection. Section~\ref{sec:experiment} presents extensive experiments for event detection, and the paper concludes with a summary of the research in Section~\ref{sec:conclusion}.
-
-
-
-%\begin{itemize}
-%\item How do we differentiate absenteeism from noise signals?
-%\item How can wavelet graph be used for group abnormality detection?
-%\item How do we detect events from linking absenteeism group with burst group?
-%\end{itemize}
+The rest of this chapter is organized as follows. Section 2 covers related work in the areas of social movements, information diffusion in networks, external influences, and Brownian motion. Section 3 proposes the geometric Brownian motion propagation mechanism. Section 4 introduces the bispace propagation model, especially the model of propagation in latent space. In Section 5, we
+present our dataset and experimental setup,
+followed by initial experimental findings. Section 6 discusses the
+evaluation results for our approach followed by a brief discussion in
+Section 7.

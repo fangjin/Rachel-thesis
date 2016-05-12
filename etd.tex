@@ -49,6 +49,8 @@
 \newcommand{\argmin}{\arg\!\min}
 \newcommand{\argmax}{\arg\!\max}
 
+
+\renewcommand{\baselinestretch}{1}
 \begin{document}
 
 \thispagestyle{empty}
@@ -91,12 +93,12 @@ Feng Chen
 
 \vfill
 
-May 30, 2016 \\
+2016 summer \\
 Arlington, Virginia
 
 \vfill
 
-Keywords: Information Propagation, Absenteeism, Event Detection, Social Networks
+Keywords: Information Propagation, Group Anomaly, Mass Movement, Event Detection, Social Networks
 \\
 Copyright 2016, Fang Jin
 
@@ -124,11 +126,12 @@ Fang Jin
 \end{center}
 
 Online social networks have become a staging ground for modern movements, with the Arab
-Spring being the most prominent example. In an effort to understand and predict those movements, social media is regarded as valuable social sensor to disclose the underlying behavior and pattern. To fully understand the mass movement information propagation pattern in social networks, several problems need to be considered and addressed. Specifically, modeling mass movements that incorporate (i) multiple spaces (ii) dynamic network structure (iii) swift outbreak/slowly evolving transmission (iv) misinformation would be highly propitious in understanding information propagation in social medias.
+Spring being the most prominent example. In an effort to understand and predict those movements, social media is regarded as valuable social sensor to disclose the underlying behavior and pattern. To fully understand the mass movement information propagation pattern in social networks, several problems need to be considered and addressed. Specifically, modeling mass movements that incorporate (i) multiple spaces (ii) dynamic network structure (iii) misinformation and (iv) swift outbreak/slowly evolving transmission would be highly propitious in understanding information propagation in social medias.
 
-This dissertation explores four research problems underlying mass movement adoption in social media. First, how do mass movements get mobilized on Twitter, especially in a specific geographic area. Second, how do we detect protest activity in social networks by observing group abnormality in graph? Third, how can we infer the causality of a specific type of protest, say climate related protest? Fourth, how do we distinguish real movements from rumors or misinformation campaigns?
+This dissertation explores four research problems underlying mass movement adoption in social media. First, how do mass movements get mobilized on Twitter, especially in a specific geographic area. Second, how do we detect protest activity in social networks by observing group anomaly in graph?
+Third, how do we distinguish real movements from rumors or misinformation campaigns? Fourth, how can we infer the causality of a specific type of protest, say climate related protest?
 
-A fundamental objective of this research has been to comprehensively study the mass movement adoption in social networks, it may cross multiple spaces, it may evolve with dynamic network structures, it can be swift outbreaks or long term slowly evolving transmissions, what is more, it may mixed with misinformation campaigns. Each of those issues requires the development of new mathematical models and algorithmic approaches which are explored here.  It is my hope that this work will facilitate advancements in information propagation, group abnormality detection and misinformation distinction, and ultimately helps improve the understanding of mass movement and their adoptions in social networks.
+A fundamental objective of this research has been to comprehensively study the mass movement adoption in social networks, it may cross multiple spaces, it may evolve with dynamic network structures, it can be swift outbreaks or long term slowly evolving transmissions, what is more, it may mixed with misinformation campaigns. Each of those issues requires the development of new mathematical models and algorithmic approaches which are explored here.  It is my hope that this work will facilitate advancements in information propagation, group anomaly detection and misinformation distinction, and ultimately helps improve the understanding of mass movement and their adoptions in social networks.
 
 %As social media (e.g., Twitter) continues to increase in popularity, it is becoming employed
 %as a social sensor into real-world events. Most current research focuses on
@@ -161,12 +164,26 @@ A fundamental objective of this research has been to comprehensively study the m
 %\chapter*{Dedication}
 
 \chapter*{Acknowledgments}
-I would like to acknowledge and express my gratitude to several individuals for their contributions and support through my years as a doctoral student.
+Over the past four and half years I have received support and encouragement from a great number of individuals.
 
-My advisor, Naren Ramakrishnan, for giving me the independence to pursue my research interests. I am especially grateful for his advice and wisdom over the past four years.
+My deepest gratitude is to my advisor, Dr. Naren Ramakrishnan. I have been amazingly fortunate to have an advisor who gave me the freedom to explore on my own, and at the same time pick me back when I got lost. His far-sighted research attitude and respectable personality lead Discovery Analytics Center a collaborative and productive place. His insight, wisdom and humour make my graduate study a rich and rewarding journey, which I will cherish forever.
 
-My doctoral committee - Chang-Tien Lu, Yang Cao, Chris North, Feng Chen - for their valuable
-comments, guidance and encouragement.
+I am grateful to Dr. Chang-Tien Lu, one of the best teachers that I have had in my life. He introduced data analytics and open a new window to me. He provided infinite support and encouragement while I was looking for an academic job.
+
+I would like to thank Dr. Feng Chen, a mentor and a friend, for his support over the past several years as I moved from an idea to a completed study. I am deeply grateful to him for the countless discussions that helped me sort out the technical details of my paper.
+
+I appreciate the efforts of Dr. Yang Cao, for his encouragement and practical advice in inspiring me to work on chapter~\ref{ch:rumor}. I am also thankful to him sparing no effort in supporting my job hunting and I deeply appreciate his belief in me.
+
+I would like to say thanks to Dr. Chris North, for his support, feedback, and valuable discussions that helped me understand my research area better. It has always been pleasant to have such a knowledgeable and amiable professor around.
+
+I would like to thank Dr. Huzefa Rangwala, who is always generous to give advice and provide help. I hope one day I would become a good advisor as Dr. Rangwala has been to me.
+
+I am also indebted to the members of Discovery Analytics Center, thanks for making our lab such a warm and joyful family.
+
+I would like to thank my collaborator Edward Dougherty, one of the best collaborators ever. His enthusiasm and efficiency has always inspired me.
+
+Most importantly, I would like to thank my parents for their constant source of strength. I am so grateful to my husband for his care, sacrifice, and love. I would like to say thanks to him for walking with me through hardship, challenge and setbacks.
+
 
 
 \tableofcontents
@@ -181,13 +198,13 @@ comments, guidance and encouragement.
 \pagenumbering{arabic}
 \pagestyle{myheadings}
 
-\subimport{ch1/}{ch1.tex}
-\subimport{ch2/}{ch2.tex}
-\subimport{ch3/}{ch3.tex}
-\subimport{ch4/}{ch4.tex}
-\subimport{ch5/}{ch5.tex}
-\subimport{ch6/}{ch6.tex}
-\subimport{ch7/}{ch7.tex}
+\subimport{ch1/}{ch1.tex}%introduction
+\subimport{ch2/}{ch2.tex}%related work
+\subimport{ch3/}{ch3.tex}%KDD GBM
+\subimport{ch4/}{ch4.tex}%absenteeism
+\subimport{ch5/}{ch5.tex}%rumor
+\subimport{ch6/}{ch6.tex}%climate
+\subimport{ch7/}{ch7.tex}%conclusion
 
 
 

@@ -8,11 +8,11 @@ using the methods of mathematical modeling and data mining.
 
 
 \section{Motivation}
- This dissertation explores four research problems underlying mass movement adoption in social media. In contrast to popular memes, they constitute modelling protest mobilization, detect graph group abnormality pattern, infer protest causality, and distinguish real movement from rumors. 
+ This dissertation explores four research problems underlying mass movement adoption in social media. In contrast to popular memes, they constitute modelling protest mobilization, detect graph group anomaly pattern, infer protest causality, and distinguish real movement from rumors.
 (i) First, how do mass movements get mobilized on Twitter, especially in a specific geographic area,
-(ii) Second, how do we detect protest activity in social networks by observing group abnormality in graph?
-(iii) Third, how can we infer the causality of climate related protests?
-and (iv) Fourth, how do we distinguish real movements from rumors or misinformation campaigns?
+(ii) Second, how do we detect protest activity in social networks by observing group anomaly in graph?
+(iii) Third, how do we distinguish real movements from rumors or misinformation campaigns?
+and (iv) Fourth, how can we infer the causality of climate related protests?
 \\
 
 \noindent
@@ -22,15 +22,15 @@ Several interesting questions arise in this space. Which node is the key player 
 How do specific memes get adopted in the network? When do they translate into mass movements?\\
 
 \noindent
-{\bf Group abnormality in graph:}
-Group abnormality not only depends on each user's activity, but also closely associates with the graph structure. In recent year, a significant body of research on group abnormality has been focused on two aspects: (1) modeling users behaviors to define the group abnormality, but fail to pay attention to the underly network structure; (2) define the group in local scale with distance-based restrictions such as distance, radius, or even nodes numbers, but fail to consider in the global perspective, as nodes with far distance could be highly associated. We pay attention to the global level group abnormality,  without setting any restriction to the group definition, consider both the users' behavior and the underlying graph structure. Investigating this phenomenon of broad group abnormality behavior online holds enormous potential for understanding large-scale, disruptive societal events, such as mass movements.
+{\bf Group anomaly in graph:}
+Group anomaly not only depends on each user's activity, but also closely associates with the graph structure. In recent year, a significant body of research on group anomaly has been focused on two aspects: (1) modeling users behaviors to define the group anomaly, but fail to pay attention to the underlying network structure; (2) define the group in local scale with distance-based restrictions such as distance, radius, or even nodes numbers, but fail to consider in the global perspective, as nodes with far distance could be highly associated. We pay attention to the global level group anomaly,  without setting any restriction to the group definition, consider both the users' behavior and the underlying graph structure. Investigating this phenomenon of broad group anomaly behavior online holds enormous potential for understanding large-scale, disruptive societal events, such as mass movements.
 
 %bursts and increases of user activity in social media. However, real world events not only correlate with burst signals, but can also exhibit unusually low levels of activity in social networks. We pay attention to information absenteeism, i.e.,situations where regularly active users become inactive. Investigating this phenomenon of unusually calm behavior online holds enormous potential for understanding localized, disruptive societal events.  Such scenarios succeeded by potential burst interactions, allow us to devise models that capture early warnings for group anomaly detection.\\
 
 \noindent
 {\bf Climate related protest causality:}
 The occurrence of either a shift in climate, extreme weather, or environmental catastrophe is not sufficient to guarantee that civil unrest is likely to follow. In general the causal mechanisms leading to civil unrest are very complex, and there is no easy way to determine a linear pathway to
-protest. What is climate related protest evolution pattern, thus how does the climate disasters lead to armed protests? What is the coherent correlations among the climate protests? 
+protest. What is climate related protest evolution pattern, thus how does the climate disasters lead to armed protests? What is the coherent correlations among the climate protests?
 
 
 \noindent
@@ -39,6 +39,112 @@ multiple propagation paths, mixed messages, innuendos, falsehoods, and rumors.
 How do we track the spread of rumors and misinformation campaigns and can we distinguish them
 from `regular' or normal propagation patterns? Can we distinguish real movement from rumors or misinformation campaigns?\\
 
+
+\section{Methods}
+Here we present an overview of the methods used in this dissertation.
+They will serve as he foundation to the key new information diffusion models proposed  in Chapters~\ref{ch:GBM} -~\ref{ch:rumor}.
+
+\subsection{Geometric Brownian Motion}
+Brownian motion is the random motion of particles suspended in a fluid (a liquid or a gas) resulting from their collision with the quick atoms or molecules in the gas or liquid. This term
+can also refer to the mathematical model used to describe such random movements, which is often called a particle theory~\cite{morters2010brownian}.
+
+Geometric Brownian motion is a continuous-time stochastic process in which the logarithm of the randomly varying quantity follows a Brownian motion (also called a Wiener process) with drift. It is an important example of stochastic processes satisfying a stochastic differential equation (SDE); in particular, it is used in mathematical finance to model stock prices (such as the price of a stock over time), subject to random noise.
+
+A stochastic process $S_t$ is said to follow a geometric Brownian motion if it satisfies the following stochastic differential equation:
+$$d S_t = \mu S_t dt + \delta S_t dW_t $$
+we call $W_t$ as a Wiener process (Brownian motion) and $\mu$ the drift, $\delta$ the volatility.
+
+Consider a Brownian motion trajectory that satisfies the differential equation, $\mu S_t dt$ controls the `trend' of this trajectory and the term $\delta S_t W_t$ controls the `random noise' effect in the trajectory. The analytical solution of this geometric brownian motion is given by $$S_t = S_0 exp((\mu-\frac{\delta^2}{2})t + \delta W_t) $$
+According to the GBM properties, $ln(S_{t}^{ij})$ is a Gaussian variable given by:
+$$ln(S_{t}^{ij})\sim \mathcal{N}((\mu - \frac{\sigma^2}{2})t, \sigma ^{2}t)$$
+
+
+\subsection{Graph Wavelets}
+Graph wavelets are a form of graphical models bringing
+three kinds of benefits: (a) they can
+represent the social network (structure), (b) they
+perform inference between nodes/edges; and (c) they can help
+capture the properties of the social network. We employ graphical models here for spatial
+information propagation and specifically graph wavelets to study absenteeism.
+The classic wavelet has been referred
+to as a mathematical microscope since it is capable of showing signal abnormality with
+different scales. Wavelets help analyze signals which contain features that vary in time, space, and frequency (scale). Graph wavelets are particularly suited to study
+complex networks, as they
+render the graph with good localization properties both in frequency and vertex (i.e. spatial)
+domains. Their scaling property allows us to zoom in/out of the underlying structure of the graph.
+
+\subsection{Epidemiological Models}
+Epidemiological models provide a foundational approach in social network analysis since they elucidate the embedded information diffusion process.
+These models typically divide the total population into several compartments
+which reflect the status of an individual. For instance, common compartments
+denote susceptible (S), exposed (E), infected (I), and
+recovered (R) individuals. Individuals transit from one compartment to another, with
+certain probabilities that have to be estimated from data.
+The simplest model, SI, has two states; susceptible (S) individuals get infected (I) by one of their neighbors and stay infected thereinafter. While conceptually easy to understand, it is unrealistic for practical situations.
+The SIS model is popular in infectious disease modeling wherein individuals can transition back and forth between susceptible (S) and infected (I) states (e.g., think of allergies and
+the common cold); this model is often used as the baseline model for more sophisticated approaches.
+The epidemic model SIR was firstly proposed to simulate the disease spreading on population groups in 1927~\cite{kermack1927contribution}, which enables individuals to recover (R) but is not suited for modeling news cascades on Twitter since there is no intuitive mapping to what `recovering' means.
+The SEIZ model (susceptible, exposed, infected, skeptic) proposed by Bettencourt et al.~\cite{powerofgoodidea:2006} takes the interesting approach of introducing an exposed state (E). Individuals in such a state take some time before they begin to believe (I)
+in a story (i.e., get infected).
+
+\section{Goals of the Dissertation}
+The overall aim of this dissertation is to identify modeling approaches and strategies that identify
+novel information propagate patterns as motivated earlier. We propose
+four mass movement topics here.
+
+\paragraph{Topic 1: Mass Protest Adoption in Social Networks}
+
+Modeling the movement of information within social media outlets, like
+Twitter, is key to understanding to how ideas spread but quantifying such
+movement runs into several difficulties. Two specific areas that elude a clear
+characterization are (i) the intrinsic random nature of individuals to
+potentially adopt and subsequently broadcast a Twitter topic, and (ii) the
+dissemination of information via non-Twitter sources, such as news outlets
+and word of mouth, and its impact on Twitter propagation. These distinct
+yet inter-connected areas must be incorporated to generate a
+comprehensive model of information diffusion. We propose a bispace model
+to capture propagation in the union of (exclusively) Twitter and
+non-Twitter environments. To quantify the stochastic nature of Twitter
+topic propagation, we combine principles of geometric Brownian motion and
+traditional network graph theory. We apply Poisson process functions to model
+information diffusion outside of the Twitter mentions network. We discuss techniques
+to unify the two sub-models to accurately model information dissemination. We
+demonstrate the novel application of these techniques on real
+Twitter datasets related to mass protest adoption in social communities.
+
+\paragraph{Topic 2: Protests Detection from Group Anomaly}
+
+Event detection in online social media has primarily focused on identifying
+abnormal spikes, or bursts, in activity. However, disruptive events such as socio-economic disasters, civil unrest, and even power outages, often result in abnormal troughs involving group absenteeism of activity. We present the first study, to our knowledge, that models absenteeism and uses detected absenteeism as a basis for event detection in location based social networks (LBSN) such as Twitter. Our framework addresses the challenges of (i) early detection of absenteeism, (ii) identifying the point of origin, and (iii) identifying groups or communities underlying the absenteeism. Our approach uses the formalism of graph wavelets to represent the spatiotemporal structure and user activity in a LSBN. This formalism affords multiscale analysis, enabling us to detect anomalous behavior at different graph resolutions, which in turn allows identification of event location and anomalous groups underlying the network. We introduce a systematic two-pass detection method using graph wavelets to detect group absenteeism and then check if there is a subsequent activity spike.
+
+\paragraph{Topic 3: Real Movement Distinguish in Social Networks}
+
+Quantifying information diffusion on social network has been an interesting and unresolved problem for several years now. A better understanding of information diffusion, especially how news and rumors propagate through a network empower us to design strategies that can enhance spreading of news and curbing of rumors. Epidemic models have been used in the past to study information diffusion based on an assumption that rumor/news spreading is no different than the propagation of a contagious disease.
+
+We use an enhanced epidemic model SEIZ that has been specifically designed for information diffusion. The model introduces one more compartment called exposed (E), which refers to the individuals who has been exposed to a story but have still not adopted/rejected it. We use five true news stories and three rumors from varied geographical locations and topics. We also introduce a one-step graph transfer model that can mimic step by step information propagation on Twitter. Our experimental results prove that SEIZ model is far more accurate in describing information diffusion than the other baseline epidemic models. Further, our one-step graph transfer model imitates information cascades of the stories with a very reasonable error.
+
+\paragraph{Topic 4: Causality Inference to Climate Related Protest}
+To infer climate protest causality, we need to develop a classifier which is able to separate out climate related protests from others. By analyzing historical climate protest events, we identify that different climate diasters cause related protests with different time span, depends the climate diaster influence and frequency. From constructing knowledge graph to represent link relationships between entities, we discloses protest causalities in Latin American countries, illustrate the pathways from climate disasters to climate protests. This paper also identifies the climate related protest patterns, discover the coherent relationship among different protests demanding.
+
+In studying long-running, slowly evolving topics like climate change, we need to develop novel approaches to track them on social media. In particular, interactions in this space and how they evolve into social movements in still unclear. We aim to combine analysis of historical news/posts and extract relevant information chains. By combining such analysis with social media, we aim to extract pertinent social media activity.
+
+\section{Organization of the Dissertation}
+The remainder of the dissertation proposal is organized as follows.
+
+In Chapter~\ref{ch:related} we review of all the related work.
+
+In Chapter~\ref{ch:GBM}, we address the problem of multiple spaces information dissemination, such as via social networks and outlets such as word of mouth. Specifically, we introduce a trust function to simulate how users are influenced by their friends through direct mention using the `@' symbol. We present how our bispace model can capture propagation in the union of (exclusively) Twitter and non-Twitter environments.
+
+Chapter~\ref{ch:absenteeism} defines social network movements by an undirected, weighted graph. We detect the group anomaly not only by observing the user activity, but also consider the whole network structure. We propose to use graph wavelet to detect the group anomaly from a global viewpoint. We pay attention to user activity vectors and model their behaviors on graphs and uses detected anomaly as a basis for event detection.
+
+
+In Chapter~\ref{ch:rumor}, we investigate the problem of distinguishing real movements from rumors in social networks. Here we design strategies that can enhance the spreading of news and the curbing of rumors. We present how to simulate the `doubt' and `believe' sentiment propagations. We also introduce a one-step graph transfer model that can mimic step by step information propagation on Twitter. Finally, we test the models using five true news stories and three rumors from varied geographical locations and topics. We also study the problem of misinformation propagation in the era of Ebola. All the experiments are conducted on Ebola-related rumors and all the evaluations are based on real-world data.
+
+Chapter~\ref{ch:climate} describes how we deal with problem of identifying linkages between climate change related phenomena and climate protests. We build a climate protest classifier which is able to separate out protests directly or indirectly resulting from a major climatic, severe weather, or environmental event. By analyzing large historical protest reports, we make use of knowledge graph to represent the link relationships between entities, and further locate and identify the causality of most climate protests.
+
+Chapter~\ref{ch:conclusion} presents the concluding remarks and illustrates future research directions.
+
+%%%%%%%%%%%%%%%%%%%% prelim %%%%%%%%%%%%
 %\section{Four Problems in Information Diffusion}
 %This dissertation explores four research problems underlying information diffusion in
 %social media.
@@ -79,114 +185,3 @@ from `regular' or normal propagation patterns? Can we distinguish real movement 
 %to other world events. How do we model information diffusion of such events by combining information
 %from other sources, e.g., news media?
 
-\section{Methods}
-Here we present an overview of the methods used in this dissertation.
-They will serve as he foundation to the key new information diffusion models proposed  in Chapters 2--5.
-
-\subsection{Geometric Brownian Motion}
-Brownian motion is the random motion of particles suspended in a fluid (a liquid or a gas) resulting from their collision with the quick atoms or molecules in the gas or liquid. This term
-can also refer to the mathematical model used to describe such random movements, which is often called a particle theory~\cite{morters2010brownian}.
-
-Geometric Brownian motion is a continuous-time stochastic process in which the logarithm of the randomly varying quantity follows a Brownian motion (also called a Wiener process) with drift. It is an important example of stochastic processes satisfying a stochastic differential equation (SDE); in particular, it is used in mathematical finance to model stock prices (such as the price of a stock over time), subject to random noise.
-
-%\paragraph{Definition of GBM}
-A stochastic process $S_t$ is said to follow a geometric Brownian motion if it satisfies the following stochastic differential equation:
-$$d S_t = \mu S_t dt + \delta S_t dW_t $$
-we call $W_t$ as a Wiener process (Brownian motion) and $\mu$ the drift, $\delta$ the volatility.
-
-Consider a Brownian motion trajectory that satisfies the differential equation, $\mu S_t dt$ controls the `trend' of this trajectory and the term $\delta S_t W_t$ controls the `random noise' effect in the trajectory. The analytical solution of this geometric brownian motion is given by $$S_t = S_0 exp((\mu-\frac{\delta^2}{2})t + \delta W_t) $$
-According to the GBM properties, $ln(S_{t}^{ij})$ is a Gaussian variable given by:
-$$ln(S_{t}^{ij})\sim \mathcal{N}((\mu - \frac{\sigma^2}{2})t, \sigma ^{2}t)$$
-
-
-\subsection{Graph Wavelets}
-Graph wavelets are a form of graphical models bringing
-three kinds of benefits: (a) they can
-represent the social network (structure), (b) they
-perform inference between nodes/edges; and (c) they can help
-capture the properties of the social network. We employ graphical models here for spatial
-information propagation and specifically graph wavelets to study absenteeism.
-The classic wavelet has been referred
-to as a mathematical microscope since it is capable of showing signal abnormality with
-different scales. Wavelets help analyze signals which contain features that vary in time, space, and frequency (scale). Graph wavelets are particularly suited to study
-complex networks, as they
-render the graph with good localization properties both in frequency and vertex (i.e. spatial)
-domains. Their scaling property allows us to zoom in/out of the underlying structure of the graph.
-
-\subsection{Epidemiological Models}
-Epidemiological models provide a foundational approach in social network analysis since they elucidate the embedded information diffusion process.
-%Epidemiological models provide a classical approach to study how information diffuses.
-These models typically divide the total population into several compartments
-which reflect the status of an individual. For instance, common compartments
-denote susceptible (S), exposed (E), infected (I), and
-recovered (R) individuals. Individuals transit from one compartment to another, with
-certain probabilities that have to be estimated from data.
-The simplest model, SI, has two states; susceptible (S) individuals get infected (I) by one of their neighbors and stay infected thereinafter. While conceptually easy to understand, it is unrealistic for practical situations.
-The SIS model is popular in infectious disease modeling wherein individuals can transition back and forth between susceptible (S) and infected (I) states (e.g., think of allergies and
-the common cold); this model is often used as the baseline model for more sophisticated approaches.
-The epidemic model SIR was firstly proposed to simulate the disease spreading on population groups in 1927~\cite{kermack1927contribution}, which enables individuals to recover (R) but is not suited for modeling news cascades on Twitter since there is no intuitive mapping to what `recovering' means.
-The SEIZ model (susceptible, exposed, infected, skeptic) proposed by Bettencourt et al.~\cite{powerofgoodidea:2006} takes the interesting approach of introducing an exposed state (E). Individuals in such a state take some time before they begin to believe (I)
-in a story (i.e., get infected).
-
-\section{Goals of the Dissertation}
-The overall aim of this dissertation is to identify modeling approaches and strategies that identify
-novel information propagate patterns as motivated earlier. We propose
-four mass movement topics here.
-
-\paragraph{Topic 1: Mass Protest Adoption in Social Networks}
-
-Modeling the movement of information within social media outlets, like
-Twitter, is key to understanding to how ideas spread but quantifying such
-movement runs into several difficulties. Two specific areas that elude a clear
-characterization are (i) the intrinsic random nature of individuals to
-potentially adopt and subsequently broadcast a Twitter topic, and (ii) the
-dissemination of information via non-Twitter sources, such as news outlets
-and word of mouth, and its impact on Twitter propagation. These distinct
-yet inter-connected areas must be incorporated to generate a
-comprehensive model of information diffusion. We propose a bispace model
-to capture propagation in the union of (exclusively) Twitter and
-non-Twitter environments. To quantify the stochastic nature of Twitter
-topic propagation, we combine principles of geometric Brownian motion and
-traditional network graph theory. We apply Poisson process functions to model
-information diffusion outside of the Twitter mentions network. We discuss techniques
-to unify the two sub-models to accurately model information dissemination. We
-demonstrate the novel application of these techniques on real
-Twitter datasets related to mass protest adoption in social communities.
-
-\paragraph{Topic 2: Protests Detection from Group Abnormality}
-
-Event detection in online social media has primarily focused on identifying
-abnormal spikes, or bursts, in activity. However, disruptive events such as socio-economic disasters, civil unrest, and even power outages, often result in abnormal troughs involving group absenteeism of activity. We present the first study, to our knowledge, that models absenteeism and uses detected absenteeism as a basis for event detection in location based social networks (LBSN) such as Twitter. Our framework addresses the challenges of (i) early detection of absenteeism, (ii) identifying the point of origin, and (iii) identifying groups or communities underlying the absenteeism. Our approach uses the formalism of graph wavelets to represent the spatiotemporal structure and user activity in a LSBN. This formalism affords multiscale analysis, enabling us to detect anomalous behavior at different graph resolutions, which in turn allows identification of event location and anomalous groups underlying the network. We introduce a systematic two-pass detection method using graph wavelets to detect group absenteeism and then check if there is a subsequent activity spike.
-
-\paragraph{Topic 3: Causality Inference to Climate Related Protest}
-To infer climate protest causality, we need to develop a classifier which is able to separate out climate related protests from others. By analyzing historical climate protest events, we identify that different climate diasters cause related protests with different time span, depends the climate diaster influence and frequency. From constructing knowledge graph to represent link relationships between entities, we discloses protest causalities in Latin American countries, illustrate
-the pathways from climate disasters to climate protests. This paper also identifies the climate related protest patterns, discover the coherent relationship among different protests demanding.
-
-%In studying long-running, slowly evolving topics like climate change, we need to develop
-%novel approaches to track them on social media. In particular, interactions in this space and how
-%they evolve into social movements in still unclear. We aim to combine analysis of historical news/posts and extract relevant information chains. By combining such analysis with social media, we aim to extract pertinent social media activity.
-
-
-\paragraph{Topic 4: Real Movement Distinguish in Social Networks}
-
-Quantifying information diffusion on social network has been an interesting and unresolved problem for several years now. A better understanding of information diffusion, especially how news and rumors propagate through a network empower us to design strategies that can enhance spreading of news and curbing of rumors. Epidemic models have been used in the past to study information diffusion based on an assumption that rumor/news spreading is no different than the propagation of a contagious disease.
-
-We use an enhanced epidemic model SEIZ that has been specifically designed for information diffusion. The model introduces one more compartment called exposed (E), which refers to the individuals who has been exposed to a story but have still not adopted/rejected it. We use five true news stories and three rumors from varied geographical locations and topics. We also introduce a one-step graph transfer model that can mimic step by step information propagation on Twitter. Our experimental results prove that SEIZ model is far more accurate in describing information diffusion than the other baseline epidemic models. Further, our one-step graph transfer model imitates information cascades of the stories with a very reasonable error.
-
-\section{Organization of the Dissertation}
-The remainder of the dissertation proposal is organized as follows.
-
-In Chapter 2, we address the problem of multiple spaces information dissemination, such as via social networks and outlets such as word of mouth. Specifically, we introduce a trust function to simulate how users are influenced by their friends through direct mention using the `@' symbol. We present how our bispace model can capture propagation in the union of (exclusively) Twitter and non-Twitter environments.
-
-Chapter 3 defines social network movements by an undirected, weighted graph. We detect the group abnormality not only by observing the user activity, but also consider the whole network structure. We propose to use graph wavelet to detect the group abnormality from a global viewpoint. We pay attention to user activity vectors and model their behaviors on graphs and uses detected abnormality as a basis for event detection.
-
-
-Section 4 describes how we deal with problem of identifying linkages between climate change related
-phenomena and climate protests. We build a climate protest classifier which is able to separate out protests directly or indirectly resulting from a major climatic, severe weather, or environmental event. By analyzing large historical protest reports, we make use of knowledge graph to represent the link relationships between entities, and further locate and identify the causality of most climate protests.
-
-% By analyzing large historical news reports and social media posts, we developed methods to detect information chain which can suggest how key events translate or influence social movements.
-
-In Chapter 5, we investigate the problem of distinguishing real movements from rumors in social networks. Here we design strategies that can enhance the spreading of news and the curbing of rumors. We present how to simulate the `doubt' and `believe' sentiment propagations. We also introduce a one-step graph transfer model that can mimic step by step information propagation on Twitter. Finally, we test the models using five true news stories and three rumors from varied geographical locations and topics. We also study the problem of misinformation propagation in the era of Ebola. All the experiments are conducted on Ebola-related rumors and all the evaluations are based on real-world data.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

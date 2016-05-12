@@ -1,32 +1,39 @@
-\chapter{Protest Detection from Group Abnormality}
 
-%\chapter{Event Detection based on Information Absenteeism}
-%Information Absenteeism Detection on Social Graphs
+\chapter{Spacial Modeling using Geometric Brownian Motion}
+\label{ch:GBM}
+%Modeling Mass Protest Adoption in Social Network Communities using Geometric Brownian Motion
+
 % if you want to define paper specific  macros
 % then put everthing between begingroup and endgroup
 \begingroup
 \newcommand{\score}{S}
 \newcommand{\myalgo}{CoolAlgo}
 
-
 %\begin{abstract}
-%Event detection in online social media has primarily focused on identifying
-%abnormal spikes, or bursts, in activity. However, disruptive events such as socio-economic disasters, civil unrest, and even power outages, often result in abnormal troughs involving group absenteeism of activity. We present the first study, to our knowledge, that models absenteeism and uses detected absenteeism as a basis for event detection in location based social networks (LBSN) such as Twitter. Our framework addresses the challenges of (i) early detection of absenteeism, (ii) identifying the point of origin, and (iii) identifying groups or communities underlying the absenteeism. Our approach uses the formalism of graph wavelets to represent the spatiotemporal structure and user activity in a LSBN. This formalism affords multiscale analysis, enabling us to detect anomalous behavior at different graph resolutions, which in turn allows identification of event location and anomalous groups underlying the network. We introduce a systematic two-pass detection method using graph wavelets to detect group absenteeism and then check if there is a subsequent activity spike. The effectiveness of our approach is highlighted with three case studies involving Twitter activity over Latin American countries.
+%Modeling the movement of information within social media outlets, like
+%Twitter, is key to understanding to how ideas spread but quantifying such
+%movement runs into several difficulties. Two specific areas that elude a clear
+%characterization are (i) the intrinsic random nature of individuals to
+%potentially adopt and subsequently broadcast a Twitter topic, and (ii) the
+%dissemination of information via non-Twitter sources, such as news outlets
+%and word of mouth, and its impact on Twitter propagation. These distinct
+%yet inter-connected areas must be incorporated to generate a
+%comprehensive model of information diffusion. We propose a bispace model
+%to capture propagation in the union of (exclusively) Twitter and
+%non-Twitter environments. To quantify the stochastic nature of Twitter
+%topic propagation, we combine principles of geometric Brownian motion and
+%traditional network graph theory. We apply Poisson process functions to model
+%information diffusion outside of the Twitter mentions network. We discuss techniques
+%to unify the two sub-models to accurately model information dissemination. We
+%demonstrate the novel application of these techniques on real
+%Twitter datasets related to mass protest adoption in social communities.
 %\end{abstract}
 
-%\input{section/1absenteeism.tex}
-
-\input{section/1introduction}
-
-\input{section/2related}
-
-\input{section/3problem}
-
-\input{section/4algorithm}
-
-\input{section/5experiment}
-
-\input{section/6conclusion}
-
+\input{section/1introduction.tex}
+%\input{section/2related.tex}
+\input{section/3GBM.tex}
+\input{section/4Bi-space.tex}
+\input{section/5experiments.tex}
+\input{section/6conclusions.tex}
 
 \endgroup

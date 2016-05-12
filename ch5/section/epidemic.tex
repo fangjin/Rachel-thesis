@@ -35,10 +35,9 @@ In order to adapt this model for Twitter, we have given new meaning to these ter
 \item Susceptible individuals remain so until coming into contact with an infected person.
 \end{itemize}
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
   \includegraphics[width=3in]{pictures/implementation_flow.png}
-  \vspace{-1em}
   \caption{Numerical implementation work-flow.
  % For both the SIS and SEIZ models, a nonlinear least squares fit of each ODE system to Twitter data identifies an optimal parameter set by minimizing the difference between the Infected compartment and the Twitter data.
   }
@@ -116,7 +115,7 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
 %The only data available is the Twitter data itself, which we used to leverage information about the infected compartment.
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Boston_SIS.png}
@@ -126,13 +125,12 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Boston_SEIZ.png}
   \label{fig:Boston_bombing_seiz}
  }
-\vspace{-1em}
 \caption{Best fit modeling for Boston news.}
 \label{fig:Boston_bombing}
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Pope_SIS.png}
@@ -142,14 +140,13 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Pope_SEIZ.png}
   \label{fig:Benedict_seiz}
  }
-\vspace{-1em}
 \caption{Best fit modeling for Pope news.
 \label{fig:Benedict}
 }
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Amuay_SIS.png}
@@ -159,14 +156,13 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Amuay_SEIZ.png}
   \label{fig:Gas_explosion_seiz}
  }
-\vspace{-1em}
 \caption{Best fit modeling for Amuay news.}
 \label{fig:Gas_explosion}
 \end{figure}
 
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Michelle_SIS.png}
@@ -176,13 +172,12 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Michelle_SEIZ.png}
   \label{fig:Michelle_seiz}
  }
-\vspace{-1.08em}
 \caption{Best fit modeling for Michelle news.}
 \label{fig:Michelle}
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Obama_SIS.png}
@@ -192,13 +187,12 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Obama_SEIZ.png}
    \label{fig:Obama_seiz}
  }
-\vspace{-1em}
 \caption{Best fit modeling for Obama news.}
 \label{fig:Obama}
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Doom_SIS.png}
@@ -208,7 +202,6 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
    \includegraphics[width=2in,height=1.5in] {pictures/Doom_SEIZ.png}
    \label{fig:Doomsday_seiz}
  }
-\vspace{-1em}
 \caption{Best fit modeling for Doomsday rumor.}
 \label{fig:Doomsday}
 \end{figure}
@@ -217,7 +210,7 @@ During our adoption of the SIS and SEIZ models to understand Twitter datasets, w
 
 
 
-\begin{table*}[t]
+\begin{table*}[th]
 \tiny
 \caption{Fitting error of SIS and SEIZ models}
 \vspace{0.5em}
@@ -265,7 +258,7 @@ The experimental implementation was done in Matlab. The {\bf lsqnonlin} function
 
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Castro_SIS.png}
@@ -275,13 +268,12 @@ The experimental implementation was done in Matlab. The {\bf lsqnonlin} function
    \includegraphics[width=2in,height=1.5in] {pictures/Castro_SEIZ.png}
    \label{fig:Castro_seiz}
  }
-\vspace{-1.2em}
 \caption{Best fit modeling for Castro rumor.}
 \label{fig:Castro}
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \subfigure[SIS]{
    \includegraphics[width=2in,height=1.5in] {pictures/Riot_SIS.png}
@@ -291,7 +283,6 @@ The experimental implementation was done in Matlab. The {\bf lsqnonlin} function
    \includegraphics[width=2in,height=1.5in] {pictures/Riot_SEIZ.png}
   \label{fig:Mexico_riot_seiz}
  }
-\vspace{-1.2em}
 \caption{Best fit modeling for Riot news.}
 \label{fig:Mexico_riot}
 \end{figure}
