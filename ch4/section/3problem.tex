@@ -1,6 +1,6 @@
 \section{Preliminaries} \label{sec:preliminaries}
 In this section, we formalize our approach to event detection.
-We first describe the accompanying notations in section~\ref{sec:notations} which will be used throughout the paper.
+We first describe the accompanying notations in section~\ref{sec:notations} which will be used throughout the chapter.
 Then we formally present our research problem statement, provide a brief comparison of our approach to a conventional solution, and review the challenging issues that are relevant to an event detection problem.
 \subsection{Notations}
 \label{sec:notations}
@@ -34,7 +34,7 @@ Empirically, tweeting locations can be modeled as a Gaussian distribution, which
 \end{equation}
 , where $i$ denotes the index of the vertex, $X^t_i$ is the tweeting volume at time interval $t$, $\mu$ is the trailing $T$-day moving average of the volume at time $t$, and $\sigma$ is the standard deviation of that average volume.
 Here, a positive absenteeism score indicates a high levels of user activity, while a negative score indicates lower levels in activity.
-For the experiments described later in the paper, we set the value of $T=30$ days. The notation for absenteeism function $f^t(i;T)$ is simplified to $f$ when $t$ and $T$ are obvious from the context.
+For the experiments described later in the chapter, we set the value of $T=30$ days. The notation for absenteeism function $f^t(i;T)$ is simplified to $f$ when $t$ and $T$ are obvious from the context.
 \subsection{Graph Anomaly}
 \label{sec:Graph_Anomaly}
 %Classic wavelet is called mathematical microscope since it is capable of showing signal abnormality with different scales.
@@ -61,7 +61,7 @@ f(n)= \sum\limits_{l=0}^{N-1}\hat{f}(l)\chi_l(n)
 \label{eq:graphFourier1}
 \hat{f}(l):= \sum\limits_{n=0}^{N-1}\chi^*_l(n)f(n)
 \end{equation}
-$\hat{f}(l)$ is the inner product of $f$ and anomaly pattern $\chi_l$, and is called the graph anomaly degree in this paper, and is also called the corresponding Fourier coefficient.
+$\hat{f}(l)$ is the inner product of $f$ and anomaly pattern $\chi_l$, and is called the graph anomaly degree in this chapter, and is also called the corresponding Fourier coefficient.
 
 
 \subsection{Generalized Graph Anomaly}
@@ -99,7 +99,7 @@ Further, according to lemma~\ref{lem:1}, if $d_G(m,n)>p$, then $\mathcal{L}^p(m,
 
 \subsection{Problem Statement}
 \label{sec:problemformulation}
-In this paper, we focus on the problem of event detection from online social networks, based on the absenteeism behavior observed in user activity in geographically proximal communities or group of cities.
+In this chapter, we focus on the problem of event detection from online social networks, based on the absenteeism behavior observed in user activity in geographically proximal communities or group of cities.
 Conventionally, this problem can be described as following: \emph{given a graph and \textit{absenteeism score} vector, $\mathbf{G}(V,E,W;f^t)$ at time interval $t$, select a subset $\Sigma \subseteq V$, such that
 \begin{eqnarray}
  \label{eq: problem}

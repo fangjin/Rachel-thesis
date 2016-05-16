@@ -25,13 +25,13 @@ GSR is a gold standard report of protests organized by MITRE, using human analys
 
 \begin{figure}[th]
 \centerline
-{\includegraphics[width = 3.2in]{figures/gsr_event_json.png}}
+{\includegraphics[width = 4in]{figures/gsr_event_json.png}}
 \caption{Gold standard report (GSR) format.}
 \label{GSR}
 \end{figure}
 
 
-We address three foundational problems. First, we use machine learning to classify climate related protests. By developing a logistic regression classifier, 25352 GSR civil unrest events were classified as either being climate or non-climate related using terms in the description of the event. Second, we use the textual description of protests to extract the climate protest category for protests in each country. For each major climate category, we adopt the knowledge graph approach to define linkage relationship between entities, and study the potentially related protest attributes. Third, we find that the massive climate protests show that certain protest types are shown to correlate with other protest types. Specifically, we find clues such as a lack of water is highly linked with power shortage. This is the first large-scale study of climate related protests to our knowledge. Generally, the main contribution of this paper can be summarized as:
+We address three foundational problems. First, we use machine learning to classify climate related protests. By developing a logistic regression classifier, 25352 GSR civil unrest events were classified as either being climate or non-climate related using terms in the description of the event. Second, we use the textual description of protests to extract the climate protest category for protests in each country. For each major climate category, we adopt the knowledge graph approach to define linkage relationship between entities, and study the potentially related protest attributes. Third, we find that the massive climate protests show that certain protest types are shown to correlate with other protest types. Specifically, we find clues such as a lack of water is highly linked with power shortage. This is the first large-scale study of climate related protests to our knowledge. Generally, the main contribution of this chapter can be summarized as:
 
 \begin{enumerate}
   \item We develop a logistic regression classifier, which can classify climate protests from non-climate protests automatically based on protest event descriptions.
@@ -98,14 +98,14 @@ The Lagrange function of \ref{eq:svm2} is
 
 
 %\paragraph{Implementation}
-%In order to apply SVM algorithm on GSR dataset, we need to vectorize the text dataset. First of all, we construct a word corpus which includes every word shown in the dataset (including non-words). We accept non-words because most coinages come from Internet and some of them might be important for the events. %As we accept non-words, the corpus might be large than our corpus vocabulary. 
+%In order to apply SVM algorithm on GSR dataset, we need to vectorize the text dataset. First of all, we construct a word corpus which includes every word shown in the dataset (including non-words). We accept non-words because most coinages come from Internet and some of them might be important for the events. %As we accept non-words, the corpus might be large than our corpus vocabulary.
 %Then, for every fields, the content is converted to a corresponding vector based on the corpus. If one word exists in specific field, a calculated value will be assign to the corresponding element in the vector. Other numerical values will also be added in the vector. By this way, we could convert the dataset into a huge matrix.
 
 %Minimizing (2) can be rewritten as a constrained optimization problem with a differentiable objective function in the following way.
 %
 %For each $i \in \{1,\,\ldots,\,n\}$ we introduce the variable $\zeta_i$, and note that $ \zeta_i = \max\left(0, 1 - y_i(w\cdot x_i + b)\right)$  if and only if $ \zeta_i$ is the smallest nonnegative number satisfying $ y_i(w\cdot x_i + b) \geq 1- \zeta_i.$
 %
-%Thus we can rewrite the optimization problem as follows$$ \text{minimize } \frac 1 n \sum_{i=1}^n \zeta_i + \lambda\|w\|^2 ,$$ $$ \text{subject to } y_i(x_i \cdot w + b) \geq 1 - \zeta_i \,\text{ and }\,\zeta_i \geq 0,\,\text{for all }i.$$This is called the ''primal'' problem.After the preprocessing, we could apply SVM algorithm on GSR matrix. We randomly label 1000 events from GSR dataset and use ten-fold cross validation to train out SVM. 
+%Thus we can rewrite the optimization problem as follows$$ \text{minimize } \frac 1 n \sum_{i=1}^n \zeta_i + \lambda\|w\|^2 ,$$ $$ \text{subject to } y_i(x_i \cdot w + b) \geq 1 - \zeta_i \,\text{ and }\,\zeta_i \geq 0,\,\text{for all }i.$$This is called the ''primal'' problem.After the preprocessing, we could apply SVM algorithm on GSR matrix. We randomly label 1000 events from GSR dataset and use ten-fold cross validation to train out SVM.
 
 
 \subsection{Logistic Regression}
@@ -184,11 +184,11 @@ For these countries, which typically have smaller populations, the significance 
 \begin{figure}[t]
 	\centering
 	\subfigure[]{
-		\includegraphics[height=2in] {figures/map-climate-number.png}
+		\includegraphics[height=2.5in] {figures/map-climate-number.png}
 		\label{map_number}
 	}
 	\subfigure[]{
-		\includegraphics[height=2in] {figures/map-climate-percentage.png}
+		\includegraphics[height=2.5in] {figures/map-climate-percentage.png}
 		\label{map_percentage}
 	}
 	\caption{(a) Climate related protests events numbers; (b) Climate related protests percentage in Latin American countries, from July 2012 to March 2015. }
@@ -270,15 +270,15 @@ Through complex channels such as food supply, the effects of climate impact can 
 \begin{figure*}[t]
 	\centering
 	\subfigure[Mexico]{
-		\includegraphics[height=1.3in] {figures/Mexico_disaster2.png}
+		\includegraphics[height=1.35in] {figures/Mexico_disaster2.png}
 		\label{Mexico_disaster_timeseries}
 	}
 	\subfigure[Brazil]{
-		\includegraphics[height=1.3in] {figures/Brazil_disaster1.png}
+		\includegraphics[height=1.35in] {figures/Brazil_disaster1.png}
 		\label{Brazil_disaster_timeseries}
 }
 	\subfigure[Venezuela]{
-		\includegraphics[height=1.3in] {figures/Venezuela_disaster.png}
+		\includegraphics[height=1.35in] {figures/Venezuela_disaster.png}
 		\label{Venezuela_disaster_timeseries}
 	}
 	\caption{(a) Mexico climate disasters and climate protests. The blue time series shows the climate related protest events, and light red vertical lines show two storm diasters in Mexico, storm Manuel in September 17, 2013 and hurricane Odile in September 15, 2014 respectively. (b)Brazil climate disasters and climate protests. The blue time series shows the climate related protest events, and yellow vertical lines show three drought diasters in Brazil, drought in Feb 2012, Heat wave in Feb 2014, and drought in Oct 2014, respectively. (c) Venezuela climate disasters and climate protests. The blue time series shows the climate related protest events, and rose vertical line show local area flood diaster, and yellow vertical lines drought disasters.}
@@ -299,11 +299,11 @@ The official climate disaster report for each country is shown with climate rela
 \begin{figure}[t]
 	\centering
 	\subfigure[Storm Manuel, Sept 2013]{
-		\includegraphics[width=2.7in] {figures/Mexico-2013-Manuel-new}
+		\includegraphics[width=3in] {figures/Mexico-2013-Manuel-new}
 		\label{storm2013}
 	}
 	\subfigure[Hurricane Odile, Sept 2014]{
-		\includegraphics[width=2.7in] {figures/Mexico_2014_Odile-new}
+		\includegraphics[width=3in] {figures/Mexico_2014_Odile-new}
 		\label{storm2014}
 	}
 	\caption{The map shows population density of all Mexico's 32 states. The track shows Tropical Storm Manuel of 2013 and Hurricane Odile of 2014, points in different color represent the wind speeds. }
@@ -330,7 +330,7 @@ As we show, the range of impact can extend even beyond the occurrence of other s
 
 \begin{figure}[t]
 \centerline
-{\includegraphics[width=3in]{figures/Mexico_Manuel_wordcloud.png}}
+{\includegraphics[width=4in]{figures/Mexico_Manuel_wordcloud.png}}
 \caption{Word cloud of Mexico storm Manuel, Sept 13, 2013.}
 \label{Manuel_word_cloud}
 \end{figure}
@@ -381,7 +381,7 @@ Of the climate related protests, we are interested in what are the protesters de
 
 \begin{figure}[t]
 \centerline
-{\includegraphics[width=4in]{figures/causality1.png}}
+{\includegraphics[width=4.5in]{figures/causality1.png}}
 \caption{Climate protest causality diagram. Left bar shows ten countries' climate protest numbers, and right bar shows nine climate event categories which cause climate protests.}
 \label{causality}
 \end{figure}
@@ -506,7 +506,7 @@ The results of the classifier indicate a number of broad properties about climat
 
 From our analysis, we found different climate disasters may cause related protests with different time span.
 For example, the tropical storm Manuel in Mexico was followed by a wave of climate related protests lasting as long as 17 months.
-In Venezuela, the protests caused by one drought always overlap with the other drought. This paper discloses protest causalities in Latin American countries, and illustrates the pathways from climate disasters to climate protests. This paper also identifies the climate related protest patterns, and discovers the coherent relationships among different protests.
+In Venezuela, the protests caused by one drought always overlap with the other drought. This chapter discloses protest causalities in Latin American countries, and illustrates the pathways from climate disasters to climate protests. This chapter also identifies the climate related protest patterns, and discovers the coherent relationships among different protests.
 
 
 
