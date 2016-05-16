@@ -56,7 +56,8 @@ Essentially, Naive Bayes is maximum a posteriori classifier, which can be repres
 
 
 \subsection{Weighted Support Vector Machine}
-The training data consists of $N$ pairs $(x_1,y_1),(x_2,y_2),...,(x_N,y_N)$, with $x_i\in \mathbb{R}^p$, and $y_i \in \{-1,+1\}$. By the introducing a hyperplane of $P:=\{x| x^T\beta+\beta_0=0\}$, the classification rule is defined as $G(x)=\text{sign}[x^T\beta+\beta_0].$ To find the hyperplane $P$ for inseparable sets, it is often converted into the following quadratic convex optimization problem by defining the slack variables $\zeta=(\zeta_1,\zeta_2,..,\zeta_N)$~\cite{hastie2005elements}.
+
+Traditionally, the Support Vector Machine works in this way. The training data consists of $N$ pairs $(x_1,y_1),(x_2,y_2),...,(x_N,y_N)$, with $x_i\in \mathbb{R}^p$, and $y_i \in \{-1,+1\}$. By introducing a hyperplane of $P:=\{x| x^T\beta+\beta_0=0\}$, the classification rule is defined as $G(x)=\text{sign}[x^T\beta+\beta_0].$ To find the hyperplane $P$ for inseparable sets, it is often converted into the following quadratic convex optimization problem by defining the slack variables $\zeta=(\zeta_1,\zeta_2,..,\zeta_N)$~\cite{hastie2005elements}.
 
 \begin{equation}
     \label{eq:svm}
@@ -68,7 +69,10 @@ The training data consists of $N$ pairs $(x_1,y_1),(x_2,y_2),...,(x_N,y_N)$, wit
         & & & \zeta_i \ge 0, &\forall i \\
     \end{aligned}
 \end{equation}
-$C$ is the penalty parameter. For separable sets, $C$ corresponds to $\infty$.\\The problem with above classifier is that the penalty for misclassification are the same. However, there are a lot of cases the miss alarm should have a much higher cost than the false alarms. To consider those scenarios, we introduce two different penalty for miss alarm and false alarm. For simplicity, $I$ and $J$ denotes the subscript of positive and negative set. Thus, the problem of \ref{eq:svm} can be re-formulated as:
+where $C$ is the penalty parameter. For separable sets, $C$ corresponds to $\infty$.
+
+
+The problem with above classifier is that the penalty for misclassification are the same. However, in cases with unbalanced dataset, the miss alarm should have a much higher cost than the false alarms. As in our study, the climate related protest is more important. To consider these scenarios, we introduce two different penalties for miss alarm and false alarm. For simplicity, $I$ and $J$ denotes the subscript of positive and negative set. Thus, the problem of \ref{eq:svm} can be re-formulated as:
 
 \begin{equation}
 \label{eq:svm2}
@@ -84,7 +88,7 @@ $C$ is the penalty parameter. For separable sets, $C$ corresponds to $\infty$.\\
 The Lagrange function of \ref{eq:svm2} is
 
 \begin{equation}
-\label{eq:svm2}
+\label{eq:svm3}
 \begin{aligned}
     L_p =&  \frac 1 2||\beta||^2 + C_1 \sum_{i\in I} \zeta_i + C_2 \sum_{j\in J} \eta_j\\
         &-\sum_{i \in I}\alpha_i[x_i^T\beta+\beta_0- (1-\zeta_i)]-\sum_{i \in I}\mu_i\zeta_i\\
@@ -93,13 +97,15 @@ The Lagrange function of \ref{eq:svm2} is
 \end{equation}
 
 
-In order to apply SVM algorithm on GSR dataset, we need to vectorize text data in the dataset. First of all, we construct a word corpus which includes every word shown in the dataset (including non-words). We accept non-words because most coinages come from Internet and some of them might be important for the events. As we accept non-words, the corpus might be large than our corpus vocabulary. Then, for every fields, the content is converted to a corresponding vector based on the corpus. If one word exists in specific field, a calculated value will be assign to the corresponding element in the vector. Other numerical values will also be added in the vector. By this way, we could convert the dataset into a huge matrix.
+%\paragraph{Implementation}
+%In order to apply SVM algorithm on GSR dataset, we need to vectorize the text dataset. First of all, we construct a word corpus which includes every word shown in the dataset (including non-words). We accept non-words because most coinages come from Internet and some of them might be important for the events. %As we accept non-words, the corpus might be large than our corpus vocabulary. 
+%Then, for every fields, the content is converted to a corresponding vector based on the corpus. If one word exists in specific field, a calculated value will be assign to the corresponding element in the vector. Other numerical values will also be added in the vector. By this way, we could convert the dataset into a huge matrix.
 
-Minimizing (2) can be rewritten as a constrained optimization problem with a differentiable objective function in the following way.
-
-For each $i \in \{1,\,\ldots,\,n\}$ we introduce the variable $\zeta_i$, and note that $ \zeta_i = \max\left(0, 1 - y_i(w\cdot x_i + b)\right)$  if and only if $ \zeta_i$ is the smallest nonnegative number satisfying $ y_i(w\cdot x_i + b) \geq 1- \zeta_i.$
-
-Thus we can rewrite the optimization problem as follows$$ \text{minimize } \frac 1 n \sum_{i=1}^n \zeta_i + \lambda\|w\|^2 ,$$ $$ \text{subject to } y_i(x_i \cdot w + b) \geq 1 - \zeta_i \,\text{ and }\,\zeta_i \geq 0,\,\text{for all }i.$$This is called the ''primal'' problem.After the preprocessing, we could apply SVM algorithm on GSR matrix. We randomly label 1000 events from GSR dataset and use ten-fold cross validation to train out SVM. Figure 1 shows the result of SVM experiment.
+%Minimizing (2) can be rewritten as a constrained optimization problem with a differentiable objective function in the following way.
+%
+%For each $i \in \{1,\,\ldots,\,n\}$ we introduce the variable $\zeta_i$, and note that $ \zeta_i = \max\left(0, 1 - y_i(w\cdot x_i + b)\right)$  if and only if $ \zeta_i$ is the smallest nonnegative number satisfying $ y_i(w\cdot x_i + b) \geq 1- \zeta_i.$
+%
+%Thus we can rewrite the optimization problem as follows$$ \text{minimize } \frac 1 n \sum_{i=1}^n \zeta_i + \lambda\|w\|^2 ,$$ $$ \text{subject to } y_i(x_i \cdot w + b) \geq 1 - \zeta_i \,\text{ and }\,\zeta_i \geq 0,\,\text{for all }i.$$This is called the ''primal'' problem.After the preprocessing, we could apply SVM algorithm on GSR matrix. We randomly label 1000 events from GSR dataset and use ten-fold cross validation to train out SVM. 
 
 
 \subsection{Logistic Regression}
