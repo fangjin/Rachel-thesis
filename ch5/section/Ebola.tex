@@ -9,7 +9,7 @@ A brief timeline of these developments will help in the discussion that follows.
 
 On October 8, back in the US, Duncan succumbed to Ebola. A few days later, a healthcare worker at Texas Presbyterian Hospital in Dallas who provided care for Duncan, tested positive for Ebola. On the morning of Oct. 14, a second healthcare worker, who also provided care for Duncan, reported to the hospital with a low-grade fever and was isolated. This healthcare worker also tested positive for Ebola subsequently.
 
-Many states and cities began making contingency plans and issuing travel advisories and guidelines. Lawmakers called for screening passengers and proposed travel bans for Ebola-stricken countries. On October 23, Craig Spencer, a doctor returning from work in Guinea, was rushed to Bellevue Hospital Center with a 100.3 fever and became New York City’s first Ebola patient.
+Many states and cities began making contingency plans and issuing travel advisories and guidelines. Lawmakers called for screening passengers and proposed travel bans for Ebola-stricken countries. On October 23, Craig Spencer, a doctor returning from work in Guinea, was rushed to Bellevue Hospital Center with a 100.3 fever and became New York City's first Ebola patient.
 
 
 \subsection{Rumors on Twitter}
@@ -33,7 +33,7 @@ Many states and cities began making contingency plans and issuing travel advisor
 
 The period from end of Sep to mid-late Oct, when Ebola activity happened in the US, is also the period when conspiracy theories, innuendo and rumors began to propagate wildly on Twitter. We gathered tweets during this period and filtered them by either the mention of the keyword `ebola' or relevant hashtags such as \#ebola, \#EbolaVirus, \#EbolaOutbreak, \#EbolaWatch, \#EbolaEthics, \#EbolaChat, \#nursesfightebola, \#ebolafacts, \#StopEbola, \#FightingEbola, and \#UHCRevolution.
 
-From the gathered tweets, we removed stopwords for further processing. Figure~\ref{fig:Ebola_word_cloud} depicts word clouds constructed from the tweets for specific days. As can be seen, on 2014-09-29, when there was no Ebola incident in the US, people’s attention were primarily focused on Liberia and other African countries. On 2014-09-30, after CDC confirmed that Mr. Duncan in Dallas tested positive for Ebola, related keywords rose to the fore.
+From the gathered tweets, we removed stopwords for further processing. Figure~\ref{fig:Ebola_word_cloud} depicts word clouds constructed from the tweets for specific days. As can be seen, on 2014-09-29, when there was no Ebola incident in the US, people's attention were primarily focused on Liberia and other African countries. On 2014-09-30, after CDC confirmed that Mr. Duncan in Dallas tested positive for Ebola, related keywords rose to the fore.
 
 
 %Figure~\ref{fig:Ebola_time_series} depicts a simple frequency plot of specific keywords in Ebola-related tweets highlighting significant upticks for keywords such as Dallas, USA, CDC as well as “enfermera” (referring to the Spanish Nurse Romero and possibly other health professionals) during the studied period. Into mid October, we notice upticks in mentions of President Obama, likely due to proposed mitigation and response strategies by the US Government.
@@ -176,7 +176,7 @@ Another way to study the spread of rumors (versus news) is from an epidemiologic
    \includegraphics[width=1.48in] {pictures/Ebola/Fig7-patent-fitting.png}
   \label{fig:Ebola-patent-fitting}
  }
-\caption{Model fits of SEIZ to different rumors: (from left to right) ‘white’, ‘zombies’, ‘airborne’, and ‘patent’. (top row) Fitting results. (bottom row) time-course profiles of different compartments. }
+\caption{Model fits of SEIZ to different rumors: (from left to right) `white', `zombies', `airborne', and `patent'. (top row) Fitting results. (bottom row) time-course profiles of different compartments. }
 \label{fig:Ebola_SEIZ_fitting}
 \end{figure}
 
@@ -185,19 +185,19 @@ In earlier work~\cite{jin2013epidemiological} we demonstrated how we can accompl
 The idea in the SEIZ model is to compartmentalize a population into four categories, denoted as S, E, I, and Z. We interpret these categories with specific reference to Twitter propagation. Susceptible (S) represents a user who has not heard the information; infected (I) denotes a user who has (re)tweeted about the information; skeptic (Z) denotes a user who has heard about the information but chooses not to (re)tweet about it; and exposed (E) represents a user who has received the information via a tweet but has taken some time, an exposure delay, prior to reposting or sharing that information.
 
 
-The transitions between these states are modeled as shown in Fig~\ref{fig:Ebola_SEIZ_raw}. We caution that referring to the Z compartment as a “skeptic” is in no way an implication of the underlying truth or falsehood of the information; it simply helps capture whether users readily adopt an idea or take some time to adopt it.
+The transitions between these states are modeled as shown in Fig~\ref{fig:Ebola_SEIZ_raw}. We caution that referring to the Z compartment as a ``skeptic'' is in no way an implication of the underlying truth or falsehood of the information; it simply helps capture whether users readily adopt an idea or take some time to adopt it.
 
-Model fits of SEIZ to the different rumors and time course information for each of the state variables is given in Figure~\ref{fig:Ebola_SEIZ_fitting}. As can be seen the SEIZ model is capable of capturing a variety of information spread patterns: quasi-linear (e.g., ‘patent’), sigmoidal (‘white’), and other non-linear patterns (‘zombies’ and ‘airborne’).
+Model fits of SEIZ to the different rumors and time course information for each of the state variables is given in Figure~\ref{fig:Ebola_SEIZ_fitting}. As can be seen the SEIZ model is capable of capturing a variety of information spread patterns: quasi-linear (e.g., `patent'), sigmoidal (`white'), and other non-linear patterns (`zombies' and `airborne').
 
 
-Time course results from the SEIZ compartmental model as shown in Figure~\ref{fig:Ebola_SEIZ_fitting} depict broadly similar patterns. Here ‘N’ denotes the total size of the population (distinct Twitter users). High values of S rapidly decrease with a relatively comparable increase in Z, and a gradual increase in I that continues as E decreases. However, the patent rumor time-course data has a noticeably different response profile than the other rumor examples.
+Time course results from the SEIZ compartmental model as shown in Figure~\ref{fig:Ebola_SEIZ_fitting} depict broadly similar patterns. Here `N' denotes the total size of the population (distinct Twitter users). High values of S rapidly decrease with a relatively comparable increase in Z, and a gradual increase in I that continues as E decreases. However, the patent rumor time-course data has a noticeably different response profile than the other rumor examples.
 
 Here, the initial value of the S group begins with less than half of the total population size, and only slightly higher than the initial values of the Z and E groups. Second, the Z group is essentially constant, meaning that the number of skeptics does not change throughout the propagation time course. Third, the decrease in S does not correspond to a change in Z, as is observed in the other rumor examples. Rather, the drop in S is met with a near identical increase in E.
 
 
 These findings hint that a large influx into E without a corresponding efflux to I combined with a stagnant Z group will produce an elevated response ratio. In other words, there is a large exposure to the rumor topic without significant change in skepticism.
 
-In our earlier work on characterizing rumors~\cite{jin2013epidemiological}, we defined the notion of a ‘response ratio’ which quantifies transitions through the exposed compartment. The response ratio provides a relative measure of the population influx into the E compartment versus the efflux from this compartment. We hypothesize that this ratio could be one of the factors useful in discriminating rumors from true news, with larger response ratios associated with factual news topics.
+In our earlier work on characterizing rumors~\cite{jin2013epidemiological}, we defined the notion of a `response ratio' which quantifies transitions through the exposed compartment. The response ratio provides a relative measure of the population influx into the E compartment versus the efflux from this compartment. We hypothesize that this ratio could be one of the factors useful in discriminating rumors from true news, with larger response ratios associated with factual news topics.
 
 To compare response ratios across rumor and news, we select three breaking (true) news stories pertaining to Ebola: `Dallas' refers to the story of the first Ebola patient (Duncan) identified in the US; `NYC' refers to the first confirmation of an Ebola patient (Spencer) in New York City; and `Spencer' refers to the specific symptoms and travel activities of Spencer in the days before he was diagnosed.
 

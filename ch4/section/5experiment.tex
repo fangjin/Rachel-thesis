@@ -1,29 +1,58 @@
-\section{Experimental Results} \label{sec:experiment}
-This section discusses the applications of our approach for detecting group absenteeism.
-We begin by briefly describing the datasets we use for our experiments in Section~\ref{sec:data_collection}.
-Then we discuss in Section~\ref{sec:experimental_setup} how we assemble the graph $\mathbf{G}$ and construct the graph wavelets $\psi_{s,n}$ for absenteeism based event detection.
-Finally, in Section~\ref{sec:highlighted_results}, we describe the three case studies that illustrate how the two-pass event detection method is able to identify  absenteeism events.
+\section{Experimental Results}
+\label{sec:experiment}
+This section discusses the applications of our approach for detecting group anomaly.
+We begin by briefly describing the dataset we use for our experiments in Section~\ref{sec:data_collection}.
+Then we discuss in Section~\ref{sec:experimental_setup} the implementation details of how we assemble the graph $\mathbf{G}$ and construct the graph wavelets $\psi_{s,n}$.
+After that, we present group anomaly detection performance in protest events detection. In Section~\ref{sec:highlighted_results}, we describe three case studies that illustrate how the graph wavelet is able to capture the graph anomaly in disaster scenarios.
+
+
 \subsection{Data Collection and Preprocessing}
 \label{sec:data_collection}
-The study described in this chapter uses tweets from 22 countries in Latin America that were collected over 12 months (May 2013 to May 2014).
+The study described in this paper uses tweets from 22 countries in Latin America that were collected over 2 years (Jan 2012 to June 2014).
 We query Datasift's streaming API to collect these tweets that also have meta-information including geotag bounding boxes (structured geographical coordinates), Twitter Places (structured data), user profile location (unstructured, unverified strings), and 'mentions information' about locations present in the body of the tweet
 Typically, we found the number of tweets with readily available geo-coordinates is too low for conducting meaningful experiments.
 To circumvent this, we use the geo-enrichment algorithm described in~\cite{ramakrishnan2014beating}.
 This algorithm uses a gazetteer-based approach to look-up location names and geo-coordinates.
 To identify  location-specific tweets, we configure the geocoding tool to first consider the tweet's text for mentions of place names and geographical landmarks (e.g., say, Plaza de la Independencia (Quito, Ecuador)).
-In cases when no geographical location was found in the tweet's text, it then proceeds to process the geographical coordinates and the self-reported location string in user's profile metadata.
+In cases when no geographical location was found in the Tweets text, it then proceeds to process the geographical coordinates and the self-reported location string in user's profile metadata.
 Using the geocoding tool, we were able to extract tweets corresponding to $598,300$ unique cities from Latin America.
-Of those, we focused on $1290$ cities that had a daily average tweet volume greater than 100.
 
 %To prepare a dataset of ground truth events for our study, we focused on specific types of disruptive societal events, such as natural disasters.
 %We assume that such events are the predominant reasons that can cause group absenteeism on social networks.
 %To discern when major events occurred, we retrieved records of natural disaster related events involving earthquakes, floods, and landslides from European Emergency Response Coordination Center(ERCC)~\footnote{http://erccportal.jrc.ec.europa.eu/} and World Top Stories Timeline~\footnote{http://www.mapreport.com/}.
+
+
+
 \subsection{Experimental Setup}
 \label{sec:experimental_setup}
-In our experiments, for each Latin American country we create a graph $G(V,E,W; f)$ where each node $v \in V$ describes a city, $f$ denotes the Z-score distribution along each node, and each edge connects the nearby cities. To reduce the graph complexity, we employ a 10-nearest neighbor algorithm to construct edges in the graph. By traversing each $v$ the edge set $E$ is determined, where weight of edge $e_{ij}$ is computed as:
+
+\paragraph{Graph Setup and $Z_{score}$ Time Series}
+Each city's, $v_i$'s  location is represented by its geographical coordinate pair $lat_i$ and $lon_i$. Instead of using the real physical distance, we  define the distance of any two cities $v_i$ and $v_j$ as $d_{ij}=\sqrt{(lat_i-lat_j)^2+(lon_i-lon_j)^2}$. We setup graph $G$ as a $k$ neighbors graph, which means  each city is only  connected to its $k$-nearest-neighbors. In this paper, we set $k=5$, and all the edges' weights  in $G$ are 1. Figure~\ref{fig:brazil_graph_nn_5} shows Brazil' $5$ nearest-neighbor Graph with 1276 cities.
+
+\begin{figure}[th]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=2in, height=2in] {figures/brazil_graph_nn_5.png}
+		\label{fig:brazil_graph_nn_5}
+	}
+	\subfigure[]{
+		\includegraphics[width=2in, height=2in] {figures/brazil_zscore_31.png}
+		\label{fig:brazil_zscore_31}
+	}
+	\caption{(a) Brazil $5$ nearest-neighbor Graph: 1276 cities an all edge weights are $1$. (b) Brazil $Z_{score}$ on July 31th, 2013, the color bar shows the scale of $Z_{score}$.}
+	\label{fig:graphwaveletcoefficient}
+\end{figure}
+
+
+
+\paragraph{Time Series $Z_{score}$}
+Considering the Twitter count $X$ varies vastly among cities,  instead of using $X$ itself, we use the normalized value $Z_{score}$, which is defined as:
 \begin{equation}
-w_{ij}=exp(-{d^2_{ij}}/{2\sigma^2})
-\end{equation} , where $d_{ij}=\sqrt{(lat_i-lat_j)^2+(lon_i-lon_j)^2}$, and $\sigma^2=1$. $lat_i$ and $lon_i$ denotes the geographical coordinate pair representing each city.
+\label{eq:Z_score}
+Z_{score}= \frac{X-\mu}{\sigma}
+\end{equation}Where, $\mu$ is the mean value of the previous $30$ days Twitter counts , and $\sigma$ is the corresponding standard deviation. As shown in Figure~\ref{fig:brazil_zscore_31}, different node color shows cities' different $Z_{score}$ value.
+
+\paragraph{anomaly index $\gamma_{f}(G)$}
 Our choice for the wavelet generating kernel function, $g(x)$, is motivated by our goal to achieve scale-dependent localization.
 \begin{equation}
 g(x) = \left\{ \begin{array}{rl}
@@ -34,6 +63,75 @@ s(x) &\mbox{ for $1\leq x \leq 2$} \\
 \end{equation}
 where $s(x)=-5+11x-6x^2+x^3$.
 The scale set $\{s_j\}_{j=1}^J$ is selected to be equally logarithmically spaced between the minimum and maximum scales $s_1$ and $s_J$, which are defined in~\cite{hammond2011wavelets}.
+
+\subsection{Performance}
+We did experiment on three major protest countries: Brazil, Mexico and Venezuela, from Jan 2013 to Dec 2014. Taken the Gold Standard Report (GSR) as grand truth, we run the graph wavelet approach. For each day, decide whether there is any anomaly, if there is, identify the group of abnormal cities, then compare with GSR, see if the selected cities have protest events on that day, how many of them are matched with truth, how many of them do not have protest. We use recall, precision and F-measure to evaluate the performance.
+
+
+
+\begin{table}[bth] %!htp
+\renewcommand{\arraystretch}{1.1}
+\caption{\label{table:models_compare} The performance of graph wavelet vs. baseline and Zscore.}
+\scriptsize
+\centering
+\begin{tabular}{ l | l |l | l | l}
+\hline
+\textbf{Country} & \textbf{Method}& \textbf{Precision}  & \textbf{Recall}  & \textbf{F-measure} \\
+\hline
+Mexico & Baseline & 0.074 &0.124 & 0.090 \\
+       & Zscore & 0.221 &0.147 & 0.168 \\
+ & Graph wavelet& 0.397 &0.384 & 0.408 \\
+\hline
+Brazil & Baseline & 0.052 &0.104 & 0.060\\
+       & Zscore & 0.117&0.307 & 0.159 \\
+ & Graph wavelet& 0.404 &0.262 & 0.292 \\
+\hline
+Venezuela & Baseline & 0.078 &0.053 & 0.059 \\
+       & Zscore & 0.197 &0.197 & 0.189 \\
+ & Graph wavelet& 0.292 &0.554 & 0.355 \\
+\hline
+\end{tabular}
+\end{table}
+
+To evaluate our graph wavelet approach, we also compare with some intuitive approaches, like frequency based random assign, we call it baseline model, and Z-score based selection methods. The baseline model is built according to the historical protest records of each city, based on frequency, predict the future protests occurrence. The Z-score approach is, selecting the group of cities whose Z-score across some threshold, say $|Zscore|>3$.
+
+
+\begin{figure}[h]
+	\centering
+    {
+		\includegraphics[width= 4in] {figures/performance_compare_bar_graph_mexico.png}
+		\label{fig:distribution2}
+	}
+	\caption{Mexico protest detection performance.}
+	\label{Mexico_performance}
+\end{figure}
+
+
+
+\begin{figure}[h]
+	\centering
+    {
+		\includegraphics[width= 4in] {figures/performance_compare_bar_graph_brazil.png}
+		\label{fig:distribution2}
+	}
+	\caption{Brazil protest detection performance.}
+	\label{Brazil_performance}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+    {
+		\includegraphics[width= 4in] {figures/performance_compare_bar_graph_venezuela.png}
+		\label{fig:distribution2}
+	}
+	\caption{Venezuela protest detection performance.}
+	\label{Venezuela_performance}
+\end{figure}
+
+
+We compare three models performance over two years period test, and show the overall results on Table~\ref{table:models_compare}. Generally speaking, graph wavelet has better precision, recall, and F-measure scores than baseline across countries. The mean F-measure for graph wavelet detection across models and countries is greater than that for other predictions. Interestingly, we find that the graph wavelet work at different efficiency levels depending on each countries. Compared with Figure~\ref{Brazil_performance}, Figure~\ref{Mexico_performance} and Figure~\ref{Venezuela_performance}, we found graph wavelet model has a much higher recall in Venezuela than in Brazil, while graph wavelet has a inferior quality of event detection in Mexico than in Venezuela.
+
 
 \subsection{Case Studies}
 \label{sec:highlighted_results}
