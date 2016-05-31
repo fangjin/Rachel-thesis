@@ -1,7 +1,7 @@
 \section{Problem Formulation}
 \label{sec:problem}
 In this section, we first introduce mathematical notations. Then we formalize our approach to group anomaly.
-We first describe the accompanying notations in section~\ref{sec:notations} which will be used throughout the paper.
+We first describe the accompanying notations in section~\ref{sec:notations} which will be used throughout the chapter.
 Then we formally present problem statement, provide a brief comparison of our approach to conventional solutions, and review the challenging issues that are relevant to event detection problem.
 \subsection{Notations}
 \label{sec:notations}
@@ -22,14 +22,14 @@ The set of eigenvalue and normalized eigenvector pair is denoted as:
 \begin{equation}
 \label{eq:eigenvalues}
 \sigma({\mathbf{G}}):=\{(\lambda_l,\chi_l)\}_{l=0}^{N-1}.
-\end{equation}
+\end{equation}$\sigma({\mathbf{G}})$ is also called graph spectral of $\mathbf{G}$.
 
 
 
 
 \subsection{Problem Statement}
 \label{sec:problemformulation}
-In this paper, we focus on the problem of group anomaly from online social networks, based on the absenteeism behavior observed in user activity in geographically proximal communities or group of cities.
+In this chapter, we focus on the problem of group anomaly from online social networks, based on the absenteeism behavior observed in user activity in geographically proximal communities or group of cities.
 Conventionally, this problem can be described as following: \emph{given a graph and \textit{absenteeism score} vector, $\mathbf{G}(V,E;f^t)$ at time interval $t$, select a subset $\Sigma \subseteq V$, such that
 \begin{eqnarray}
  \label{eq: problem}
@@ -52,6 +52,8 @@ Such methods suffer from the following issues:
 In contrast, our approach proposes a novel group anomaly algorithm in social networks using spectral graph wavelet theory.
 The graph wavelets focus on the intrinsic geometric structure of the graph by transforming each vertex $v_i\in V$, and mining the topological information of both local and global centered vertices to support multiscale analysis.
 In addition, the graph wavelet approach identifies anomaly group which is automatically compact, and provides a fair and low computational method in terms of complexity for identifying abnormal group behavior in a broad application scenarios.
+
+
 
 \begin{figure}[h]
 	\centering
