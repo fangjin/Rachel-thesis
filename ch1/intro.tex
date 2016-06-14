@@ -6,13 +6,19 @@ Social network analysis is the process of gathering data from stakeholder conver
 shares some common properties in information propagation, that can be approached
 using the methods of mathematical modeling and data mining.
 
+As social media gains popularity, more and more mass movements are organized by social media, their slogans have become hashtags in Twitter. Here the mass movements more refer to social movements, which are supported by large group of individuals or organizations, focusing on specific political or social issues. In this dissertation, we intended to study the mass movements adoption patterns and other subsequent phenomenons from social media. 
+
+
+
+
+
 
 \section{Motivation}
  This dissertation explores four research problems underlying mass movement adoption in social media. In contrast to popular memes, they constitute modelling protest mobilization, detect graph group anomaly pattern, infer protest causality, and distinguish real movement from rumors.
 (i) First, how do mass movements get mobilized on Twitter, especially in a specific geographic area,
 (ii) Second, how do we detect protest activity in social networks by observing group anomaly in graph?
 (iii) Third, how do we distinguish real movements from rumors or misinformation campaigns?
-and (iv) Fourth, how can we infer the causality of climate related protests?
+and (iv) Fourth, how can we infer the pathways of climate related protests?
 \\
 
 \noindent
@@ -28,7 +34,7 @@ Group anomaly not only depends on each user's activity, but also closely associa
 %bursts and increases of user activity in social media. However, real world events not only correlate with burst signals, but can also exhibit unusually low levels of activity in social networks. We pay attention to information absenteeism, i.e.,situations where regularly active users become inactive. Investigating this phenomenon of unusually calm behavior online holds enormous potential for understanding localized, disruptive societal events.  Such scenarios succeeded by potential burst interactions, allow us to devise models that capture early warnings for group anomaly detection.\\
 
 \noindent
-{\bf Climate related protest causality:}
+{\bf Climate related protest pathways:}
 The occurrence of either a shift in climate, extreme weather, or environmental catastrophe is not sufficient to guarantee that civil unrest is likely to follow. In general the causal mechanisms leading to civil unrest are very complex, and there is no easy way to determine a linear pathway to
 protest. What is climate related protest evolution pattern, thus how does the climate disasters lead to armed protests? What is the coherent correlations among the climate protests?
 
@@ -123,8 +129,8 @@ Quantifying information diffusion on social network has been an interesting and 
 
 We use an enhanced epidemic model SEIZ that has been specifically designed for information diffusion. The model introduces one more compartment called exposed (E), which refers to the individuals who has been exposed to a story but have still not adopted/rejected it. We use five true news stories and three rumors from varied geographical locations and topics. We also introduce a one-step graph transfer model that can mimic step by step information propagation on Twitter. Our experimental results prove that SEIZ model is far more accurate in describing information diffusion than the other baseline epidemic models. Further, our one-step graph transfer model imitates information cascades of the stories with a very reasonable error.
 
-\paragraph{Topic 4: Causality Inference to Climate Related Protest}
-To infer climate protest causality, we need to develop a classifier which is able to separate out climate related protests from others. By analyzing historical climate protest events, we identify that different climate diasters cause related protests with different time span, depends the climate diaster influence and frequency. From constructing knowledge graph to represent link relationships between entities, we discloses protest causalities in Latin American countries, illustrate the pathways from climate disasters to climate protests. We also identify the climate related protest patterns, discover the coherent relationship among different protests demands.
+\paragraph{Topic 4: Pathways Inference to Climate Related Protest}
+To infer climate protest pathways, we need to develop a classifier which is able to separate out climate related protests from others. By analyzing historical climate protest events, we identify that different climate diasters cause related protests with different time span, depends the climate diaster influence and frequency. From constructing knowledge graph to represent link relationships between entities, we discloses protest causalities in Latin American countries, illustrate the pathways from climate disasters to climate protests. We also identify the climate related protest patterns, discover the coherent relationship among different protests demands.
 
 
 %In studying long-running, slowly evolving topics like climate change, we need to develop novel approaches to track them on social media. In particular, interactions in this space and how they evolve into social movements in still unclear. We aim to combine analysis of historical news/posts and extract relevant information chains. By combining such analysis with social media, we aim to extract pertinent social media activity.

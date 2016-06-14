@@ -36,7 +36,7 @@ We address three foundational problems. First, we use machine learning to classi
 \begin{enumerate}
   \item We develop a logistic regression classifier, which can classify climate protests from non-climate protests automatically based on protest event descriptions.
   \item We analyze the climate protest spikes and disclose its relationship with climate disasters. For instance, the time span caused by storm and hurricane events in Mexico last much longer. However, for drought events in Brazil, the protests being initiated more swiftly, also last much shorter.
-  \item We figure out the proportion of protest causality. By studying some major climate disasters, we also discover each protest category's evolution pattern, thus how does the climate disasters lead to armed climate protests.
+  \item We figure out the climate protest pathways. By studying some major climate disasters, we also discover each protest category's evolution pattern, thus how does the climate disasters lead to armed climate protests.
   \item We investigate the climate co-occurrence. For instance, the water related protests are often accompanies with electricity shortage, while land ownership protests are often associate with farmers.
 \end{enumerate}
 %
@@ -413,7 +413,7 @@ We expand on these observations in the following where we analyze several dimens
 		\includegraphics[width=3in, height=1.5in] {figures/Venezuela-diagram2.png}
 		\label{Venezuela_causality}
     }
-	\caption{Climate protest causality diagram}
+	\caption{Climate protest pathways diagram}
 \label{three-causality}
 \end{figure}
 
@@ -439,8 +439,8 @@ We expand on these observations in the following where we analyze several dimens
 \end{figure*}
 
 
-\subsection{Climate Protest Causality}
-For some severe and dominant climate events, such as storm, hurricane, flood, and drought events, we employ the knowledge graph to represent the link relationships between entities. By matching the object or subject with climate related keywords, and predicate to be causality relationship like result of, cause by, lead to, blamed, accused of, demanding, against, request, we can locate and further identify the causality of most protest descriptors.
+\subsection{Climate Protest Precursors}
+For some severe and dominant climate events, such as storm, hurricane, flood, and drought events, we employ the knowledge graph to represent the link relationships between entities. By matching the object or subject with climate related keywords, and predicate to be causality relationship like result of, cause by, lead to, blamed, accused of, demanding, against, request, we can locate and further identify the pathways of most protest descriptors.
 
 %To determine the different pathways to climate motivated protest events, a three step process was implemented to extract the relevant information.
 %
@@ -458,7 +458,7 @@ For some severe and dominant climate events, such as storm, hurricane, flood, an
 %\textbf{c. Causality query.}
 %With a complete knowledge database, we are going to poses domain specific questions, for example, who are the main players in the article? what are the reasons for the protest? To such questions like that, we are seeking causal (base) relations between concepts. Specifically, we are interested in entities to be storm, hurricane, heat, draught, etc,, climate related keywords. By matching the object or subject with climate related keywords, and predicate to be causality relationship like result of, cause by, lead to, blamed, accused of, demanding, against, request, we can locate and further identify most of protest causalities.
 
-Figure~\ref{Mexico_causality} shows the storm caused protests demands in Mexico, which generally falls into four categories: supply, home, government and reconstruction. In the supply related protest, the causality includes but not limited to: lack of drinking water, lack of good support, and power outage. The second category is about home, they protest either because of lost homes, or request to relocate to avoid storm, or request to reconstruct homes. Another protest type targets at government, they either fight because government did not take action, or blame government's indifference to damages, or request finance compensation to the damages. In the reconstruction category, residents demand reconstruct channels to avoid more storms, request to reconstruct bridges, roads, schools, or unsatisfied with the slow pace of rebuilding homes. Figure~\ref{Brazil_causality} describes the causality of Brazil climate related protests. One line is heat wave hampered production, which cause farmers' protests, the other line is drought causing residents lack of drinking water thus lead to protest, and the third line is lack of water causing farmers facing the risk of losing land, which result in protest. In Venezuela, the protests are more water-electricity centralized, as shown in Figure~\ref{Venezuela_cluster}. Scarce rainfall, drought plus failing infrastructure, which makes water shortage and blackout is an everyday fact of life in Venezuela. The electricity shortage deteriorates water shortage, leads to food shortage, and worsens food quality, and so forth. All those situation touches off climate related protests.
+Figure~\ref{Mexico_causality} shows the storm caused protests demands in Mexico, which generally falls into four categories: supply, home, government and reconstruction. In the supply related protest, the causality includes but not limited to: lack of drinking water, lack of good support, and power outage. The second category is about home, they protest either because of lost homes, or request to relocate to avoid storm, or request to reconstruct homes. Another protest type targets at government, they either fight because government did not take action, or blame government's indifference to damages, or request finance compensation to the damages. In the reconstruction category, residents demand reconstruct channels to avoid more storms, request to reconstruct bridges, roads, schools, or unsatisfied with the slow pace of rebuilding homes. Figure~\ref{Brazil_causality} describes the pathways of Brazil climate related protests. One line is heat wave hampered production, which cause farmers' protests, the other line is drought causing residents lack of drinking water thus lead to protest, and the third line is lack of water causing farmers facing the risk of losing land, which result in protest. In Venezuela, the protests are more water-electricity centralized, as shown in Figure~\ref{Venezuela_cluster}. Scarce rainfall, drought plus failing infrastructure, which makes water shortage and blackout is an everyday fact of life in Venezuela. The electricity shortage deteriorates water shortage, leads to food shortage, and worsens food quality, and so forth. All those situation touches off climate related protests.
 
 
 \subsection{Climate Protest Pattern}

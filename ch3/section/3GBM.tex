@@ -25,15 +25,13 @@ As can be seen in Fig.~\ref{fig:mention_network}, the mentions network
 is a directed graph. Weight $w_{14}$ is the number of times Twitter user $v_1$ mentions user $v_4$, which is 1, while $w_{41}$ is 6. Note
 that $w_{21}$ is 5, while $w_{12}$ is 0 (not shown).
 
+We claim, there is an invisible distance between every two nodes within mention network, we call it Brownian distance.
 We define the neighborhood $N(v_i)$ of a user $v_i$ as the set of all users
-mentioned by $v_i$, i.e., those for whom there is a directed edge from
-$v_i$.
-For each user $v_j \in N(v_i)$, we define the Brownian distance from user $v_i$ to $v_j$ to be
+mentioned by $v_i$, i.e., those for whom there is a directed edge from $v_i$. We define the Brownian distance depends on the mention frequency and number of common direct neighbors. For each user $v_j \in N(v_i)$, the Brownian distance from user $v_i$ to $v_j$ to be 
 \begin{equation}
  d_{ij}=\frac{1}{(\omega_{ij}+1)(\omega_{ji}+1)^\gamma(\eta_{ij}+1)^\gamma}
 \end{equation}
-Here, $\eta_{ij}$ is the number of common direct neighbors shared by user $v_i$ and user $v_j$~\cite{zhou2004network}. In Fig.~\ref{fig:mention_network}, node $v_1$ and $v_4$ share two common direct neighbors---$v_3$ and $v_5$---and
-hence $\eta_{14}$ is 2.
+Here, $\eta_{ij}$ is the number of common direct neighbors shared by user $v_i$ and user $v_j$~\cite{zhou2004network}. In Fig.~\ref{fig:mention_network}, node $v_1$ and $v_4$ share two common direct neighbors---$v_3$ and $v_5$---and hence $\eta_{14}$ is 2. Brownian distance is a measurement of the closeness and diffusion possibility of the nodes.
 
 We use the bias coefficient $\gamma \geq 1$ to heuristically
 weigh mentions that carry more impact. If $v_i$ mentions $v_j$, meaning that $\omega_{ij} > 0$, we believe this expresses $v_i$'s intention to propagate information to $v_j$.
@@ -41,9 +39,10 @@ Since $v_j$ may not know or care about $v_i$ and consequently may seldom or neve
 Furthermore, if $v_i$ and $v_j$ share neighbors in the mentions
 network, the two users may have a closer relationship than other users
 with no shared mentioned Twitter users, and thus this component
-is weighted by $\gamma$ as well. A Laplacian-style $(+1)$ correction is used
+is weighted by $\gamma$ as well. The parameter $\gamma$ is estimated from training process.
+A Laplacian-style $(+1)$ correction is used
 when there are no counter mentions or no mutual mentions.
-Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight.
+Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight. 
 
 \subsection{Trust Functions and GBM}
 \begin{figure}[ht]
@@ -165,10 +164,8 @@ ln(S_{t+\delta t}^{ij})\sim \mathcal{N}((\mu - \frac{\sigma^2}{2})(t+\delta t), 
 
 
 \subsection{GBM Parameter Estimation}
-We use past protest events in
-which Twitter played a significant role in propagation to train
-our GBM model parameters. For each user who gets
-infected we record their Brownian distance and infection time. Suppose $v_j$ gets infected by $v_i$ after time $t_{ij}$; then as per our propagation model, we claim that $v_j$'s trust function $S_t^{ij}$ with $v_i$ holds:
+We use past protest events in which Twitter played a significant role in propagation to train
+our GBM model parameters. For each user who gets infected we record their Brownian distance and infection time. Suppose $v_j$ gets infected by $v_i$ after time $t_{ij}$; then as per our propagation model, we claim that $v_j$'s trust function $S_t^{ij}$ with $v_i$ holds:
 \begin{equation}
 ln(S_t^{ij}) \geq d_{ij}
 \end{equation}

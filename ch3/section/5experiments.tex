@@ -182,8 +182,8 @@ the Poisson process within the latent space.
 Given an initial mentions
 network, after training the GBM parameters of $\mu$ and $\sigma$, we proceed to conduct the GBM simulation. After estimating the Poisson parameter $\lambda$, we are able to do the
 Poisson simulation within latent space.
-We see that the GBM model
-is capable of capturing many mass protest scenarios, to the order of magnitude.
+We use accuracy, the ratio of correctly predicted observations, to measure how far the bispace model is beyond the ground truth in capturing total infected nodes number. 
+We see that the GBM model is capable of capturing many mass protest scenarios, to the order of magnitude.
 Even though it cannot simulate the propagation speed accurately
 at every time point, the method is effective at capturing the total
 number of infected nodes with an accuracy of $[0.78,0.95]$, as shown
