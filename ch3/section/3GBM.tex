@@ -27,7 +27,7 @@ that $w_{21}$ is 5, while $w_{12}$ is 0 (not shown).
 
 We claim, there is an invisible distance between every two nodes within mention network, we call it Brownian distance.
 We define the neighborhood $N(v_i)$ of a user $v_i$ as the set of all users
-mentioned by $v_i$, i.e., those for whom there is a directed edge from $v_i$. We define the Brownian distance depends on the mention frequency and number of common direct neighbors. For each user $v_j \in N(v_i)$, the Brownian distance from user $v_i$ to $v_j$ to be 
+mentioned by $v_i$, i.e., those for whom there is a directed edge from $v_i$. We define the Brownian distance depends on the mention frequency and number of common direct neighbors. For each user $v_j \in N(v_i)$, the Brownian distance from user $v_i$ to $v_j$ to be
 \begin{equation}
  d_{ij}=\frac{1}{(\omega_{ij}+1)(\omega_{ji}+1)^\gamma(\eta_{ij}+1)^\gamma}
 \end{equation}
@@ -39,10 +39,10 @@ Since $v_j$ may not know or care about $v_i$ and consequently may seldom or neve
 Furthermore, if $v_i$ and $v_j$ share neighbors in the mentions
 network, the two users may have a closer relationship than other users
 with no shared mentioned Twitter users, and thus this component
-is weighted by $\gamma$ as well. The parameter $\gamma$ is estimated from training process.
+is weighted by $\gamma$ as well. 
 A Laplacian-style $(+1)$ correction is used
 when there are no counter mentions or no mutual mentions.
-Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight. 
+Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight. In our experiment, set $\gamma$ equals to 1.2.
 
 \subsection{Trust Functions and GBM}
 \begin{figure}[ht]
