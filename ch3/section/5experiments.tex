@@ -92,7 +92,7 @@ on Sep 1, 2013.}
 For each of our mass protest events, we filter by its specific keywords (hashtags) to obtain a set of relevant tweets and construct a mentions network from those tweets. We assume that information propagates from an initial infected user to other users through the network from one node to its neighbors. We build an adjacency matrix based on the mentions network and simulate the propagation using the GBM diffusion process as follows:
 \begin{enumerate}
   \item \textbf{Brownian distance:} The Brownian distance is intended to have
-an inverse relationship with mention frequency. As Fig.~\ref{fig:timecurve} shows, users with smaller Brownian distance have greater mention frequencies resulting in shorter mean propagation times with less variance. From Fig.~\ref{fig:timecurve}, we can see that infection time and variance generally both increase with an increase in Brownian distance. Heuristically, more frequent mentions indicate stronger ties which leads to easier adoption of information.
+an inverse relationship with mention frequency. As Fig.~\ref{fig:timecurve} shows, users with smaller Brownian distance have greater mention frequencies resulting in shorter mean propagation times with less variance. From Fig.~\ref{fig:timecurve}, we can see that infection time and variance generally both increase with an increase in Brownian distance. Heuristically, more frequent mentions indicate stronger ties which leads to easier adoption of information. We tried $\gamma$ form $1.0$ to $5.0$ with step of $0.1$, and found when $\gamma=1.2$ GBM model achieved the best prediction performance. 
 
   \item \textbf{Propagation speed: } To evaluate our dynamic GBM
 infection process assumptions, we estimate the GBM parameters for different protest events and depict the GBM propagation curves in Figs.~\ref{fig:1Yosoy2012may},~\ref{fig:4teacherSimulation}, and~\ref{fig:7ColombiaProtest}. The blue curve depicts the Poisson propagation in latent space. The red curve depicts GBM propagation through the mentions network. The green curve is the overall simulation result while the magenta curve depicts the ground truth of the protest events process. By comparing the green and magenta curves, we can evaluate the
@@ -182,7 +182,7 @@ the Poisson process within the latent space.
 Given an initial mentions
 network, after training the GBM parameters of $\mu$ and $\sigma$, we proceed to conduct the GBM simulation. After estimating the Poisson parameter $\lambda$, we are able to do the
 Poisson simulation within latent space.
-We use accuracy, the ratio of correctly predicted observations, to measure how far the bispace model is beyond the ground truth in capturing total infected nodes number. 
+We use accuracy, the ratio of correctly predicted observations, to measure how far the bispace model is beyond the ground truth in capturing total infected nodes number.
 We see that the GBM model is capable of capturing many mass protest scenarios, to the order of magnitude.
 Even though it cannot simulate the propagation speed accurately
 at every time point, the method is effective at capturing the total

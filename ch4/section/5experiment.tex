@@ -52,8 +52,10 @@ Considering the Twitter count $X$ varies vastly among cities,  instead of using 
 Z_{score}= \frac{X-\mu}{\sigma}
 \end{equation}Where, $\mu$ is the mean value of the previous $30$ days Twitter counts , and $\sigma$ is the corresponding standard deviation. As shown in Figure~\ref{fig:brazil_zscore_31}, different node color shows cities' different $Z_{score}$ value.
 
+
+
 \paragraph{kernel function, $g(x)$ and scaling function $h(x)$}
-Our choice for the wavelet generating kernel function, $g(x)$ and scaling function $h(x)$ is motivated by our goal to achieve scale-dependent localization. We set $g(x)$ and $h(x)$ as:
+Our choice for the wavelet generating kernel function, $g(x)$ and scaling function $h(x)$ is motivated by our goal to achieve scale-dependent localization. We follow the kernel function setting in~\cite{hammond2011wavelets}, which behaves as a monic power near the origin, and has power law decay for large x, as shown in Figure~\ref{kernel_function}. $g(x)$ and $h(x)$ are set as:
 \begin{equation}
 g(x) = \left\{ \begin{array}{rl}
  x &\mbox{ for $x<1$} \\
@@ -64,7 +66,20 @@ s(x) &\mbox{ for $1\leq x \leq 2$} \\
 \begin{equation}
 h_{x}= 1.385*exp(-(\frac{20x}{0.6\lambda_{max}})^4)
 \end{equation}
-The scale set $\{s_j\}_{j=1}^J$ is selected to be equally logarithmically spaced between the minimum and maximum scales $s_1$ and $s_J$, which are defined in~\cite{hammond2011wavelets}. We set $J=6$ in the experiments.
+
+
+\begin{figure}[h]
+	\centering
+    {
+		\includegraphics[width= 4in] {figures/kernel_function.png}
+		\label{fig:kernel_function}
+	}
+	\caption{Kernel function g(x).}
+	\label{kernel_function}
+\end{figure}
+
+The scale set $\{s_j\}_{j=1}^J$ is selected to be equally logarithmically spaced between the minimum and maximum scales $s_1$ and $s_J$, which are defined in~\cite{hammond2011wavelets}. We set $J=6$ in the experiments. We also try another kernel function, i.e. Mexico hat function, and find that as long as the kernel function monotonicity is the same, the difference of the wavelet coefficient is negligible.
+
 
 \paragraph{anomaly index $\gamma_f(G)$ and $\omega_{th}$}
 We claim that the event frequency $\eta$ is linear to $\gamma_f(\mathbf{G})$, and the linear equation is

@@ -39,10 +39,10 @@ Since $v_j$ may not know or care about $v_i$ and consequently may seldom or neve
 Furthermore, if $v_i$ and $v_j$ share neighbors in the mentions
 network, the two users may have a closer relationship than other users
 with no shared mentioned Twitter users, and thus this component
-is weighted by $\gamma$ as well. 
+is weighted by $\gamma$ as well.
 A Laplacian-style $(+1)$ correction is used
 when there are no counter mentions or no mutual mentions.
-Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight. In our experiment, set $\gamma$ equals to 1.2.
+Note that for $\gamma = 1$, $d_{ij}$ is an unbiased Brownian distance since $\omega_{ij}$, $\omega_{ji}$, and $\eta_{ij}$ will have the same weight. 
 
 \subsection{Trust Functions and GBM}
 \begin{figure}[ht]
