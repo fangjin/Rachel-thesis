@@ -92,7 +92,7 @@ on Sep 1, 2013.}
 For each of our mass protest events, we filter by its specific keywords (hashtags) to obtain a set of relevant tweets and construct a mentions network from those tweets. We assume that information propagates from an initial infected user to other users through the network from one node to its neighbors. We build an adjacency matrix based on the mentions network and simulate the propagation using the GBM diffusion process as follows:
 \begin{enumerate}
   \item \textbf{Brownian distance:} The Brownian distance is intended to have
-an inverse relationship with mention frequency. As Fig.~\ref{fig:timecurve} shows, users with smaller Brownian distance have greater mention frequencies resulting in shorter mean propagation times with less variance. From Fig.~\ref{fig:timecurve}, we can see that infection time and variance generally both increase with an increase in Brownian distance. Heuristically, more frequent mentions indicate stronger ties which leads to easier adoption of information. We tried $\gamma$ form $1.0$ to $5.0$ with step of $0.1$, and found when $\gamma=1.2$ GBM model achieved the best prediction performance. 
+an inverse relationship with mention frequency. As Fig.~\ref{fig:timecurve} shows, users with smaller Brownian distance have greater mention frequencies resulting in shorter mean propagation times with less variance. From Fig.~\ref{fig:timecurve}, we can see that infection time and variance generally both increase with an increase in Brownian distance. Heuristically, more frequent mentions indicate stronger ties which leads to easier adoption of information. We tried $\gamma$ form $1.0$ to $5.0$ with step of $0.1$, and found when $\gamma=1.2$ GBM model achieved the best prediction performance.
 
   \item \textbf{Propagation speed: } To evaluate our dynamic GBM
 infection process assumptions, we estimate the GBM parameters for different protest events and depict the GBM propagation curves in Figs.~\ref{fig:1Yosoy2012may},~\ref{fig:4teacherSimulation}, and~\ref{fig:7ColombiaProtest}. The blue curve depicts the Poisson propagation in latent space. The red curve depicts GBM propagation through the mentions network. The green curve is the overall simulation result while the magenta curve depicts the ground truth of the protest events process. By comparing the green and magenta curves, we can evaluate the
@@ -212,6 +212,60 @@ time point, one of its current limitations.
   \item \textbf{Is the performance of the model better
 taking into account community structure?}
 \end{itemize}
+We evaluate the model performance temporally and spatially. Temporally, we compare the estimated time series with the real time series using three different approaches: Euclidean distance, Cosine Similarity and Correlation[cite book introduction to data mining, Pang-Ning Tan]. We also compute the accuracy for the model, where the accuracy is defined as $$accuracy=\frac{number of esteimate protests}{real protest}$$. We table the performance for the five protests below, which shows that our model outperform other approaches.
+Spatially, we compare the subgraph structures and table the results below, which shows our model can beat other base ground approaches.
+\begin{table*}[!ht]
+\tiny
+\caption{GBM Model performance evaluation.}
+\centering
+\begin{tabular}{ |l|l|l|l|l|l|}
+\hline
+{Protest} & Model & Euclidean distance  & Cosine Similarity & Correlation & Accuracy\\ \cline{2-6} \hline \hline
+\multirow{3}{*}{Prot1} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot2} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot3} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot4} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot5} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot6} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\multirow{3}{*}{Prot7} & random assign & 0.53  & 0.78 & 0.82 & 0.67\\ \cline{2-6}
+ & naive Bayes & 0.61  & 0.66 & 0.52 & 0.68\\ \cline{2-6}
+ & GBM & 0.32  & 0.82  & 0.74 & 0.73\\ \hline
+\end{tabular}
+\label{table:performance_evaluation2}
+\end{table*}
+
+
+
+\begin{table*}[!ht]
+\tiny
+\caption{GBM Model performance evaluation .}
+\centering
+\begin{tabular}{|c | c | c | c | p{3cm}<{\centering} | p{2.5cm}<{\centering} | p{2.5cm}<{\centering} |}
+\hline
+& Average degree & Diameter & Graph density &Connected components& Average clustering coefficient & Average path length  \\ [1ex]
+\hline
+Simulation& 1.791 & 11&  0.002& 183& 0.083 & 4.786  \\[1ex]
+\hline
+Ground truth&  1.726 & 18 & 0.002 & 204& 0.008 & 6.261  \\[1ex]
+\hline
+\end{tabular}
+\label{table:performance_evaluation}
+\end{table*}
+
+
+
 After numerous experiments, we plot the accuracy distribution of both approaches for all our mass protest situations
 in Fig.~\ref{fig:GBM_compare_community}. Although the accuracies are
 sometimes interspersed, we can see that in overall

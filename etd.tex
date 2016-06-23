@@ -39,6 +39,8 @@
 \usepackage{caption}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{multirow}
+
 
 
 \usepackage[utf8]{inputenc}
@@ -123,13 +125,12 @@ Fang Jin
 
 \end{center}
 
-Online social networks have become a staging ground for modern movements, with the Arab
-Spring being the most prominent example. In an effort to understand and predict those movements, social media is regarded as valuable social sensor to disclose the underlying behavior and pattern. To fully understand the mass movement information propagation pattern in social networks, several problems need to be considered and addressed. Specifically, modeling mass movements that incorporate (i) multiple spaces (ii) dynamic network structure (iii) misinformation and (iv) swift outbreak/slowly evolving transmission would be highly propitious in understanding information propagation in social media.
+Online social networks have become a staging ground for many modern movements, with the Arab Spring being the most prominent example. In an effort to understand and predict those movements, social media can be regarded as a valuable social sensor for disclosing underlying behaviors and patterns. To fully understand mass movement information propagation patterns in social networks, several problems need to be considered and addressed. Specifically, modeling mass movements that incorporate (i) multiple spaces (ii) a dynamic network structure (iii) misinformation and (iv) a swift outbreak/slowly evolving transmission can be exceptionally useful in understanding information propagation in social media.
 
-This dissertation explores four research problems underlying mass movement adoption in social media. First, how do mass movements get mobilized on Twitter, especially in a specific geographic area. Second, how do we detect protest activity in social networks by observing group anomaly in graph?
-Third, how do we distinguish real movements from rumors or misinformation campaigns? Fourth, how can we infer the indicators of a specific type of protest, say climate related protest?
+This dissertation explores four research problems underlying efforts to identify and track the adoption of mass movements in social media. First, how do mass movements become mobilized on Twitter, especially in a specific geographic area? Second, can we detect protest activity in social networks by observing group anomalies in graph? Third, how can we distinguish real movements from rumors or misinformation campaigns? and Fourth, how can we infer the indicators of a specific type of protest, say climate related protest?
 
-A fundamental objective of this research has been to comprehensively study the mass movement adoption in social networks, it may cross multiple spaces, it may evolve with dynamic network structures, it can be swift outbreaks or long term slowly evolving transmissions, what is more, it may mixed with misinformation campaigns. Each of those issues requires the development of new mathematical models and algorithmic approaches which are explored here.  It is my hope that this work will facilitate advancements in information propagation, group anomaly detection and misinformation distinction, and ultimately helps improve the understanding of mass movement and their adoptions in social networks.
+A fundamental objective of this research has been to conduct a comprehensive study of how mass movement adoption functions in social networks. For example, it may cross multiple spaces, evolve with dynamic network structures, or consist of swift outbreaks or long term slowly evolving transmissions. In many cases, it may also be mixed with misinformation campaigns, either deliberate or in the form of rumors. Each of those issues requires the development of new mathematical models and algorithmic approaches such as those explored here.  It is my hope that this work will facilitate advances in information propagation, group anomaly detection and misinformation distinction and, ultimately, help to improve our understanding of mass movements and their adoption in social networks.
+
 
 %As social media (e.g., Twitter) continues to increase in popularity, it is becoming employed
 %as a social sensor into real-world events. Most current research focuses on
@@ -162,25 +163,26 @@ A fundamental objective of this research has been to comprehensively study the m
 %\chapter*{Dedication}
 
 \chapter*{Acknowledgments}
-Over the past four and half years I have received support and encouragement from a great number of individuals.
+Over the past four and half years I have received support and encouragement from a great many individuals.
 
-My deepest gratitude is to my advisor, Dr. Naren Ramakrishnan. I have been amazingly fortunate to have an advisor who gave me the freedom to explore on my own, and at the same time pick me back when I got lost. His far-sighted research attitude and respectable personality lead Discovery Analytics Center a collaborative and productive place. His insight, wisdom and humour make my graduate study a rich and rewarding journey, which I will cherish forever.
+My deepest debt is to my advisor, Dr. Naren Ramakrishnan. I have been amazingly fortunate to have an advisor who has given me the freedom to explore on my own, while at the same time pulling me back on track when I strayed too far afield. His far-sighted research attitude and the respect he has earned from his peers over the years have made the Discovery Analytics Center he leads a collaborative and productive place. His insight, wisdom and humor have made my graduate study a rich and rewarding journey that I will cherish forever.
 
-I am grateful to Dr. Chang-Tien Lu, one of the best teachers that I have had in my life. He introduced data analytics and open a new window to me. He provided infinite support and encouragement while I was looking for an academic job.
+I am especially grateful to Dr. Chang-Tien Lu, one of the best teachers that I have ever had. He introduced me to data analytics, opening up a whole new world of research and ideas to me. He has also provided unstinting support and encouragement throughout my search for an academic job.
 
-I would like to thank Dr. Feng Chen, a mentor and a friend, for his support over the past several years as I moved from an idea to a completed study. I am deeply grateful to him for the countless discussions that helped me sort out the technical details of my paper.
+I would like to thank Dr. Feng Chen, a mentor and a friend, for his support over the past several years as I moved from an idea to a completed study. I am deeply grateful to him for the countless discussions that helped me sort out the technical details of my research.
 
-I appreciate the efforts of Dr. Yang Cao, for his encouragement and practical advice in inspiring me to work on chapter~\ref{ch:rumor}. I am also thankful to him sparing no effort in supporting my job hunting and I deeply appreciate his belief in me.
+I appreciate the efforts of Dr. Yang Cao, for his encouragement and practical advice during the work reported in Chapter 5. He has also spared no effort in supporting my job hunt and his belief in me and what I can achieve has lifted my spirits when I became discouraged.
 
-I would like to say thanks to Dr. Chris North, for his support, feedback, and valuable discussions that helped me understand my research area better. It has always been pleasant to have such a knowledgeable and amiable professor around.
+I would like to say thank you to Dr. Chris North for his support, feedback, and many valuable discussions that have helped me understand my research area better. It has always been a pleasure to get to know such a knowledgeable and amiable professor.
 
-I would like to thank Dr. Huzefa Rangwala, who is always generous to give advice and provide help. I hope one day I would become a good advisor as Dr. Rangwala has been to me.
+I would like to thank Dr. Huzefa Rangwala, who has always been generous with advice and ready to provide help. I hope one day I will become as good an advisor to others as Dr. Rangwala has been to me.
 
-I am also indebted to the members of Discovery Analytics Center, thanks for making our lab such a warm and joyful family.
+I am especially indebted to all the members of Discovery Analytics Center. Thank you for making our lab group such a warm and joyful family.
 
 I would like to thank my collaborator Edward Dougherty, one of the best collaborators ever. His enthusiasm and efficiency has always inspired me.
 
-Most importantly, I would like to thank my parents for their constant source of strength. I am so grateful to my husband for his care, sacrifice, and love. I would like to say thanks to him for walking with me through hardship, challenge and setbacks.
+Most importantly, I would like to thank my parents for their constant source of strength. I am so grateful to my husband for his care, sacrifice, and love. I hope he knows how much I appreciate the way he has walked alongside me through hardship, challenge and setbacks. His faith that I will succeed has kept me going. Thank you.
+
 
 
 
@@ -197,11 +199,11 @@ Most importantly, I would like to thank my parents for their constant source of 
 \pagestyle{myheadings}
 
 \subimport{ch1/}{ch1.tex}%introduction
-\subimport{ch2/}{ch2.tex}%related work
-\subimport{ch3/}{ch3.tex}%KDD GBM
-\subimport{ch4/}{ch4.tex}%absenteeism
-\subimport{ch5/}{ch5.tex}%rumor
-\subimport{ch6/}{ch6.tex}%climate
+%\subimport{ch2/}{ch2.tex}%related work
+%\subimport{ch3/}{ch3.tex}%KDD GBM
+%\subimport{ch4/}{ch4.tex}%absenteeism
+%\subimport{ch5/}{ch5.tex}%rumor
+%\subimport{ch6/}{ch6.tex}%climate
 \subimport{ch7/}{ch7.tex}%conclusion
 
 
