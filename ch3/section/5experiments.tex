@@ -66,7 +66,7 @@ for teacher protest events.}
   \label{fig:teacher_community}
  }
 \caption{GBM and Poisson propagation simulation for teacher protests (Mexico)
-on Sep 1, 2013.}
+on Sept 1, 2013.}
 \label{fig:4teacherSimulation}
 \end{figure}
 
@@ -131,7 +131,7 @@ propagation effectively, while the general GBM method (see Fig.~\ref{fig:teacher
 \begin{figure}[ht]
 \centering
 \includegraphics[width=3.5in] {figures/Baseline.png}
-\caption{Total tweets over time from Sep 2 to Sep 11, 2013 (Mexico).}
+\caption{Total tweets over time from Sept 2 to Sept 11, 2013 (Mexico).}
 \label{fig:Baseline}
 \end{figure}
 
@@ -197,7 +197,7 @@ time point, one of its current limitations.
 In the massive protest analysis, we are interested in the total number of people participating in the protest. We do not pay much attention on individual people who participates nor not. We use bispace model to predict the protest scale within a certain time period. We evaluate the predicted time series with the ground truth time series using four different criterions: normalized root mean squared error ($NRMSE$), Cosine Similarity, Pearson Correlation, and accuracy~\cite{tan2006introduction}. Given the ground truth time series $x\_true$ and predicted time series $x\_pred$, the $NRMSE$ is defined as:
   \begin{equation}NRMSE =\frac{1}{\overline{X}}\sqrt{ \frac{1}{n}\sum_{i=1}^n(x\_true(i)-x\_pred(i))^2}\end{equation}, where $\overline{X}$ is the mean of $x\_true$.
   Accuracy is defined as:
- \begin{equation}accuracy = \frac{1}{n}\sum_{i=1}^n\frac{|x\_true(i)-x\_pred(i)|}{max(x\_true(i),x\_pred(i))}\end{equation} 
+ \begin{equation}accuracy = \frac{1}{n}\sum_{i=1}^n\frac{|x\_true(i)-x\_pred(i)|}{max(x\_true(i),x\_pred(i))}\end{equation}
 We compare bispace model with random assign and naive bayes model for the seven protests. For each model, we run the results for 20 times, and use the average value as the final results. We table the finale results in Table~\ref{table:performance_evaluation2}, which shows that bispace model outperforms other approaches uniformly.
 \begin{table*}[!ht]
 \small
@@ -211,14 +211,14 @@ We compare bispace model with random assign and naive bayes model for the seven 
  & bispace & 0.22  & 0.82  & 0.74 & 0.87\\ \hline
 \multirow{3}{*}{2} & random assign & 0.37  & 0.64 & 0.67 & 0.69\\ \cline{2-6}
  & naive Bayes & 0.29  & 0.66 & 0.69 & 0.75\\ \cline{2-6}
- & bispace & 0.27  & 0.83  & 0.71 & 0.78\\ \hline 
+ & bispace & 0.27  & 0.83  & 0.71 & 0.78\\ \hline
  \multirow{3}{*}{3} & random assign & 0.43  & 0.67 & 0.61 & 0.57\\ \cline{2-6}
  & naive Bayes & 0.33  & 0.66 & 0.62 & 0.68\\ \cline{2-6}
  & bispace & 0.22  & 0.77  & 0.74 & 0.82\\ \hline
 \multirow{3}{*}{4} & random assign & 0.33  & 0.62 & 0.73 & 0.61\\ \cline{2-6}
  & naive Bayes & 0.37  & 0.65 & 0.62 & 0.68\\ \cline{2-6}
- & bispace & 0.22  & 0.88  & 0.82 & 0.90\\ \hline 
- 
+ & bispace & 0.22  & 0.88  & 0.82 & 0.90\\ \hline
+
 \multirow{3}{*}{5} & random assign & 0.44  & 0.63 & 0.67 & 0.69\\ \cline{2-6}
  & naive Bayes & 0.42  & 0.66 & 0.66 & 0.60\\ \cline{2-6}
  & bispace & 0.27  & 0.79  & 0.77 & 0.81\\ \hline
@@ -227,7 +227,7 @@ We compare bispace model with random assign and naive bayes model for the seven 
  & bispace & 0.20  & 0.68  & 0.74 & 0.81\\ \hline
  \multirow{3}{*}{7} & random assign & 0.42  & 0.56 & 0.67 & 0.58\\ \cline{2-6}
  & naive Bayes & 0.39  & 0.66 & 0.62 & 0.69\\ \cline{2-6}
- & bispace & 0.16  & 0.88  & 0.78 & 0.89\\ \hline 
+ & bispace & 0.16  & 0.88  & 0.78 & 0.89\\ \hline
 \end{tabular}
 \label{table:performance_evaluation2}
 \end{table*}
@@ -265,7 +265,7 @@ compared with the actual network. The simulation produces networks with relative
 
 \begin{table*}[!ht]
 \tiny
-\caption{GBM simulation results for teacher protest events on Sep 2, 2013.}
+\caption{GBM simulation results for teacher protest events on Sept 2, 2013.}
 \centering
 \begin{tabular}{|c | c | c | c | p{3cm}<{\centering} | p{2.5cm}<{\centering} | p{2.5cm}<{\centering} |}
 \hline
